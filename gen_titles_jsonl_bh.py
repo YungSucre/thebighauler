@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Construit titles_all.jsonl pour le producteur thebighauler.
-Source : outputs/titles_filtered/<vertical>.txt (titres éditoriaux filtrés).
+Source : outputs/titles_final/<vertical>.txt (titres FINAUX nettoyés cross-vertical).
 Champs par item : title, slug, vertical, sub, angle, format.
 Usage : python3 gen_titles_jsonl_bh.py [--max-per-vertical N] [--limit M]
 """
@@ -8,11 +8,11 @@ import json, re, sys
 from pathlib import Path
 
 ROOT = Path("/root/thebighauler")
-FILTERED = ROOT / "outputs" / "titles_filtered"
+FILTERED = ROOT / "outputs" / "titles_final"
 OUT = ROOT / "outputs" / "titles_all.jsonl"
 
 # verticals prioritaires pour le premier lot (ceux avec le meilleur potentiel
-# d'intention commerciale + volume de recherche) — on garde un éventail large
+# d'intention commerciale + volume de recherche) — l'ordre détermine qui passe en premier
 PRIORITY = [
     "eld-compliance", "hours-of-service", "dot-compliance", "ifta", "hazmat",
     "tms-dispatch", "load-boards", "freight-broker", "factoring", "quick-pay",
@@ -74,34 +74,16 @@ def main():
         if a == "--limit" and i + 1 < len(sys.argv):
             limit = int(sys.argv[i + 1])
 
+    # ordre : verticals prioritaires d'abord, puis les autres (pour que la prod
+    # traite les meilleurs en premier, sans plafond arbitraire par vertical)
+    ordered_vids = [v for v in PRIORITY if (FILTERED / f"{v}.txt").exists()]
+    ordered_vids += sorted(v for f in FILTERED.glob("*.txt") if (v := f.stem) not in PRIORITY)
+
     items = []
-    # d'abord les verticals prioritaires
-    for vid in PRIORITY:
+    for vid in ordered_vids:
         f = FILTERED / f"{vid}.txt"
-        if not f.exists():
-            continue
         titles = [l.strip() for l in f.read_text().splitlines() if l.strip()]
         # retire les blacklistés
-        titles = [t for t in titles if not any(b in t.lower() for b in BLACKLIST)]
-        if max_per:
-            titles = titles[:max_per]
-        for t in titles:
-            items.append({
-                "title": t,
-                "slug": slugify(t),
-                "vertical": vid,
-                "sub": vid.replace("-", " "),
-                "angle": detect_angle(t),
-                "format": detect_format(t),
-            })
-
-    # puis les autres verticals (complément)
-    done_vids = set(i["vertical"] for i in items)
-    for f in sorted(FILTERED.glob("*.txt")):
-        vid = f.stem
-        if vid in done_vids or vid not in PRIORITY:
-            continue
-        titles = [l.strip() for l in f.read_text().splitlines() if l.strip()]
         titles = [t for t in titles if not any(b in t.lower() for b in BLACKLIST)]
         if max_per:
             titles = titles[:max_per]
@@ -124,6 +106,20 @@ def main():
         seen.add(it["slug"])
         uniq.append(it)
 
+    # PRIORITÉ PAR INTENTION COMMERCIALE (modèle info-first) :
+    # les articles qui convertissent sortent en premier.
+    # compare (comparatifs) > list/best-of (guides d'achat) > cost (coûts) > guide info
+    PRIO = {"compare": 0, "list": 1, "checklist": 1, "cost": 2, "best-of": 2, "how-to": 3, "guide": 4}
+    # angle cost détecté dans le titre (cost/price/rate/how much)
+    def prio_key(it):
+        f = it["format"]
+        base = PRIO.get(f, 4)
+        tl = it["title"].lower()
+        if base == 4 and any(w in tl for w in ["cost", "price", "rate", "how much", "worth", "value"]):
+            base = 2
+        return base
+    uniq.sort(key=prio_key)
+
     if limit:
         uniq = uniq[:limit]
 
@@ -137,6 +133,10 @@ def main():
     print("top verticals:", vc.most_common(10))
     fmts = Counter(i["format"] for i in uniq)
     print("formats:", dict(fmts))
+    # premiers titres (ceux qui seront produits en premier)
+    print("PREMIERS 10 (intention commerciale):")
+    for it in uniq[:10]:
+        print(f"  [{it['vertical']}|{it['format']}] {it['title'][:60]}")
 
 if __name__ == "__main__":
     main()
