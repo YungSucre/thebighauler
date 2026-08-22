@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "automatic-tire-chains-for-trucks"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/automatic-tire-chains-for-trucks/hero.jpg"
+hero_alt: "Automatic Tire Chains for Trucks"
+hero_credit: "Photo: Robert So / Pexels"
 affiliate_ready: false
 ---
 

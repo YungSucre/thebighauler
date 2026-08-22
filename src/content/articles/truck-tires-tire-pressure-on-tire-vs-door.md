@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "tire-pressure-on-tire-vs-door"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/tire-pressure-on-tire-vs-door/hero.jpg"
+hero_alt: "Tire Pressure on Tire vs Door"
+hero_credit: "Photo: Jonathan Borba / Pexels"
 affiliate_ready: false
 ---
 

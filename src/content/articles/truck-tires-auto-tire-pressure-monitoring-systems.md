@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "auto-tire-pressure-monitoring-systems"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/auto-tire-pressure-monitoring-systems/hero.jpg"
+hero_alt: "Auto Tire Pressure Monitoring Systems"
+hero_credit: "Photo: Andrea Piacquadio / Pexels"
 affiliate_ready: false
 ---
 

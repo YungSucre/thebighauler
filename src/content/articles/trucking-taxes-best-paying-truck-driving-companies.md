@@ -6,6 +6,9 @@ verticalName: "Trucking Taxes"
 slug: "best-paying-truck-driving-companies"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-paying-truck-driving-companies/hero.jpg"
+hero_alt: "Best Paying Truck Driving Companies"
+hero_credit: "Photo: Sławek Strupowski / Pexels"
 affiliate_ready: false
 ---
 

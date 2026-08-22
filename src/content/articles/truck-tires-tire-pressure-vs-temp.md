@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "tire-pressure-vs-temp"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/tire-pressure-vs-temp/hero.jpg"
+hero_alt: "Tire Pressure vs Temp"
+hero_credit: "Photo: Andrea Piacquadio / Pexels"
 affiliate_ready: false
 ---
 

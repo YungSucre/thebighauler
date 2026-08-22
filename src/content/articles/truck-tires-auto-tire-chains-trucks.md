@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "auto-tire-chains-trucks"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/auto-tire-chains-trucks/hero.jpg"
+hero_alt: "Auto Tire Chains Trucks"
+hero_credit: "Photo: Jonathan  Reynaga / Pexels"
 affiliate_ready: false
 ---
 

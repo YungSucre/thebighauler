@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "auto-tires-review-for-trucks"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/auto-tires-review-for-trucks/hero.jpg"
+hero_alt: "Auto Tires Review for Trucks"
+hero_credit: "Photo: Tom Fisk / Pexels"
 affiliate_ready: false
 ---
 

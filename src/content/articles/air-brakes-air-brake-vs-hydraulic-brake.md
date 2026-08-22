@@ -6,6 +6,9 @@ verticalName: "Air Brakes"
 slug: "air-brake-vs-hydraulic-brake"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/air-brake-vs-hydraulic-brake/hero.jpg"
+hero_alt: "Air Brake vs Hydraulic Brake"
+hero_credit: "Photo: Tuesday Temptation / Pexels"
 affiliate_ready: false
 ---
 

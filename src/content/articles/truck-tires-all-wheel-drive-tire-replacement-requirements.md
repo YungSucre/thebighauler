@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "all-wheel-drive-tire-replacement-requirements"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/all-wheel-drive-tire-replacement-requirements/hero.jpg"
+hero_alt: "All Wheel Drive Tire Replacement Requirements"
+hero_credit: "Photo: Javier Balseiro / Pexels"
 affiliate_ready: false
 ---
 

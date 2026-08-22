@@ -6,6 +6,9 @@ verticalName: "Quick Pay"
 slug: "best-freight-rate-service"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-freight-rate-service/hero.jpg"
+hero_alt: "Best Freight Rate Service"
+hero_credit: "Photo: Robert So / Pexels"
 affiliate_ready: false
 ---
 

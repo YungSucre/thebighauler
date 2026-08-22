@@ -6,6 +6,9 @@ verticalName: "Trucking Taxes"
 slug: "accounting-software-for-truckers"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/accounting-software-for-truckers/hero.jpg"
+hero_alt: "Accounting Software for Truckers"
+hero_credit: "Photo: Mikhail Nilov / Pexels"
 affiliate_ready: false
 ---
 

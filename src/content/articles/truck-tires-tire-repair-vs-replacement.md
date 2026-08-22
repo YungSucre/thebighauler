@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "tire-repair-vs-replacement"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/tire-repair-vs-replacement/hero.jpg"
+hero_alt: "Tire Repair vs Replacement"
+hero_credit: "Photo: Grégory Costa / Pexels"
 affiliate_ready: false
 ---
 

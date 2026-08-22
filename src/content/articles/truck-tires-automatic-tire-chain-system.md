@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "automatic-tire-chain-system"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/automatic-tire-chain-system/hero.jpg"
+hero_alt: "Automatic Tire Chain System"
+hero_credit: "Photo: Alexey Baikov / Pexels"
 affiliate_ready: false
 ---
 

@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "new-vs-used-tires"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/new-vs-used-tires/hero.jpg"
+hero_alt: "New vs Used Tires"
+hero_credit: "Photo: Engin Akyurt / Pexels"
 affiliate_ready: false
 ---
 

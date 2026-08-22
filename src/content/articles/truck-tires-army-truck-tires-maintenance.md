@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "army-truck-tires-maintenance"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/army-truck-tires-maintenance/hero.jpg"
+hero_alt: "Army Truck Tires Maintenance"
+hero_credit: "Photo: Magda Ehlers / Pexels"
 affiliate_ready: false
 ---
 

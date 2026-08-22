@@ -6,6 +6,9 @@ verticalName: "Quick Pay"
 slug: "best-invoice-factoring-companies-uk"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-invoice-factoring-companies-uk/hero.jpg"
+hero_alt: "Best Invoice Factoring Companies UK"
+hero_credit: "Photo: Niepoddawajsie.pl Luk / Pexels"
 affiliate_ready: false
 ---
 

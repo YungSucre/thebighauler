@@ -6,6 +6,9 @@ verticalName: "Quick Pay"
 slug: "quicken-quick-pay-vs-check-pay"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/quicken-quick-pay-vs-check-pay/hero.jpg"
+hero_alt: "Quicken Quick Pay vs Check Pay"
+hero_credit: "Photo: cottonbro studio / Pexels"
 affiliate_ready: false
 ---
 

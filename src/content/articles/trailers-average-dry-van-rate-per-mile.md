@@ -6,6 +6,9 @@ verticalName: "Trailers"
 slug: "average-dry-van-rate-per-mile"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/average-dry-van-rate-per-mile/hero.jpg"
+hero_alt: "Average Dry Van Rate per Mile"
+hero_credit: "Photo: Stephen Leonardi / Pexels"
 affiliate_ready: false
 ---
 

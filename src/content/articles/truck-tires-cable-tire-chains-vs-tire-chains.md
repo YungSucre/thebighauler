@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "cable-tire-chains-vs-tire-chains"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/cable-tire-chains-vs-tire-chains/hero.jpg"
+hero_alt: "Cable Tire Chains vs Tire Chains"
+hero_credit: "Photo: Alexey Baikov / Pexels"
 affiliate_ready: false
 ---
 

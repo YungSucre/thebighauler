@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "auto-tires-good-condition"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/auto-tires-good-condition/hero.jpg"
+hero_alt: "Auto Tires Good Condition"
+hero_credit: "Photo: Artem Balashevsky / Pexels"
 affiliate_ready: false
 ---
 

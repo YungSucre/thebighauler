@@ -6,6 +6,9 @@ verticalName: "Trailers"
 slug: "average-5th-wheel-width"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/average-5th-wheel-width/hero.jpg"
+hero_alt: "Average 5th Wheel Width"
+hero_credit: "Photo: cottonbro studio / Pexels"
 affiliate_ready: false
 ---
 

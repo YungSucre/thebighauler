@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "tire-pressure-vs-load"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/tire-pressure-vs-load/hero.jpg"
+hero_alt: "Tire Pressure vs Load"
+hero_credit: "Photo: Robert So / Pexels"
 affiliate_ready: false
 ---
 

@@ -6,6 +6,9 @@ verticalName: "Trucking Taxes"
 slug: "best-owner-operator-companies"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-owner-operator-companies/hero.jpg"
+hero_alt: "Best Owner Operator Companies"
+hero_credit: "Photo: RDNE Stock project / Pexels"
 affiliate_ready: false
 ---
 

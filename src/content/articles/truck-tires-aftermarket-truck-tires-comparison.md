@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "aftermarket-truck-tires-comparison"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/aftermarket-truck-tires-comparison/hero.jpg"
+hero_alt: "Aftermarket Truck Tires Comparison"
+hero_credit: "Photo: cottonbro studio / Pexels"
 affiliate_ready: false
 ---
 

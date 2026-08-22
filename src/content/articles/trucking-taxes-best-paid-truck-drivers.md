@@ -6,6 +6,9 @@ verticalName: "Trucking Taxes"
 slug: "best-paid-truck-drivers"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-paid-truck-drivers/hero.jpg"
+hero_alt: "Best Paid Truck Drivers"
+hero_credit: "Photo: İsa kahraman / Pexels"
 affiliate_ready: false
 ---
 
