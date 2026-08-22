@@ -1,17 +1,399 @@
 {
-  "eld-compliance": ["eld devices", "eld exemptions", "hours of service", "ifta", "dot inspection", "fmcsa rules"],
-  "tms-dispatch": ["tms software", "dispatch software", "load boards", "dispatch service", "freight broker", "trucking tms"],
-  "owner-operators": ["owner operator", "owner operator expenses", "owner operator taxes", "finding loads", "lease purchase", "owner operator salary"],
-  "maintenance": ["truck maintenance", "diesel engine problems", "truck tires", "air brakes", "dpf cleaning", "oil change interval"],
-  "fuel": ["fuel cards for truckers", "fuel economy truck", "diesel prices", "def fluid", "fuel discounts", "idling"],
-  "insurance": ["truck insurance cost", "commercial auto insurance", "cargo insurance", "bobtail insurance", "non trucking liability"],
-  "factoring": ["freight factoring", "invoice factoring", "factoring companies", "quick pay freight", "recourse vs non recourse"],
-  "cdl-licensing": ["cdl requirements", "cdl endorsements", "cdl practice test", "hazmat endorsement", "class a cdl", "cdl medical card"],
-  "trailers": ["flatbed trailer", "reefer trailer", "dry van", "fifth wheel", "trailer maintenance", "gooseneck trailer"],
-  "safety": ["pre trip inspection", "dot inspection", "weigh stations", "hours of service violations", "fmcsa audit"],
-  "business": ["start a trucking company", "trucking business plan", "mc number", "trucking authority", "trucking accounting", "trucking insurance requirements"],
-  "tech-apps": ["trucker apps", "gps for trucks", "dash cams", "eld app", "trucker weather app", "backup camera truck"],
-  "driving": ["backing up a truck", "shifting a 18 speed", "mountain driving", "night driving tips", "winter driving truck", "fuel efficient driving"],
-  "pay-careers": ["truck driver salary", "cdl jobs", "truck driving school", "truck driver training", "team driving"],
-  "truck-stops": ["truck stops", "truck parking", "pilot flying j", "truck stop showers", "rest areas"]
+  "eld-compliance": [
+    "eld devices",
+    "eld exemptions",
+    "hours of service",
+    "ifta",
+    "dot inspection",
+    "fmcsa rules"
+  ],
+  "tms-dispatch": [
+    "tms software",
+    "dispatch software",
+    "load boards",
+    "dispatch service",
+    "freight broker",
+    "trucking tms"
+  ],
+  "owner-operators": [
+    "owner operator",
+    "owner operator expenses",
+    "owner operator taxes",
+    "finding loads",
+    "lease purchase",
+    "owner operator salary"
+  ],
+  "maintenance": [
+    "truck maintenance",
+    "diesel engine problems",
+    "truck tires",
+    "air brakes",
+    "dpf cleaning",
+    "oil change interval"
+  ],
+  "fuel": [
+    "fuel cards for truckers",
+    "fuel economy truck",
+    "diesel prices",
+    "def fluid",
+    "fuel discounts",
+    "idling"
+  ],
+  "insurance": [
+    "truck insurance cost",
+    "commercial auto insurance",
+    "cargo insurance",
+    "bobtail insurance",
+    "non trucking liability"
+  ],
+  "factoring": [
+    "freight factoring",
+    "invoice factoring",
+    "factoring companies",
+    "quick pay freight",
+    "recourse vs non recourse"
+  ],
+  "cdl-licensing": [
+    "cdl requirements",
+    "cdl endorsements",
+    "cdl practice test",
+    "hazmat endorsement",
+    "class a cdl",
+    "cdl medical card"
+  ],
+  "trailers": [
+    "flatbed trailer",
+    "reefer trailer",
+    "dry van",
+    "fifth wheel",
+    "trailer maintenance",
+    "gooseneck trailer"
+  ],
+  "safety": [
+    "pre trip inspection",
+    "dot inspection",
+    "weigh stations",
+    "hours of service violations",
+    "fmcsa audit"
+  ],
+  "business": [
+    "start a trucking company",
+    "trucking business plan",
+    "mc number",
+    "trucking authority",
+    "trucking accounting",
+    "trucking insurance requirements"
+  ],
+  "tech-apps": [
+    "trucker apps",
+    "gps for trucks",
+    "dash cams",
+    "eld app",
+    "trucker weather app",
+    "backup camera truck"
+  ],
+  "driving": [
+    "backing up a truck",
+    "shifting a 18 speed",
+    "mountain driving",
+    "night driving tips",
+    "winter driving truck",
+    "fuel efficient driving"
+  ],
+  "pay-careers": [
+    "truck driver salary",
+    "cdl jobs",
+    "truck driving school",
+    "truck driver training",
+    "team driving"
+  ],
+  "truck-stops": [
+    "truck stops",
+    "truck parking",
+    "pilot flying j",
+    "truck stop showers",
+    "rest areas"
+  ],
+  "logistics": [
+    "logistics management",
+    "logistics coordinator",
+    "logistics company",
+    "freight logistics",
+    "logistics software"
+  ],
+  "warehouse": [
+    "warehouse management",
+    "warehouse jobs",
+    "warehouse safety",
+    "warehouse software",
+    "warehouse layout",
+    "forklift"
+  ],
+  "3pl": [
+    "third party logistics",
+    "3pl company",
+    "3pl pricing",
+    "3pl vs in house",
+    "3pl warehouse",
+    "3pl software"
+  ],
+  "last-mile": [
+    "last mile delivery",
+    "last mile carrier",
+    "last mile delivery cost",
+    "last mile software",
+    "last mile trends"
+  ],
+  "cold-chain": [
+    "cold chain logistics",
+    "reefer logistics",
+    "cold chain monitoring",
+    "refrigerated freight",
+    "cold storage warehouse"
+  ],
+  "intermodal": [
+    "intermodal shipping",
+    "intermodal vs over the road",
+    "intermodal container",
+    "intermodal rates",
+    "intermodal drayage"
+  ],
+  "supply-chain": [
+    "supply chain management",
+    "supply chain jobs",
+    "supply chain software",
+    "supply chain analyst",
+    "supply chain trends"
+  ],
+  "drayage": [
+    "drayage",
+    "drayage cost",
+    "drayage vs linehaul",
+    "drayage company",
+    "drayage trucking"
+  ],
+  "freight-audit": [
+    "freight audit",
+    "freight invoice audit",
+    "freight payment",
+    "freight audit software",
+    "freight bill audit"
+  ],
+  "fleet-management": [
+    "fleet management",
+    "fleet manager",
+    "fleet management software",
+    "fleet management companies",
+    "fleet manager salary"
+  ],
+  "fleet-tracking": [
+    "fleet tracking",
+    "gps fleet tracking",
+    "fleet tracking software",
+    "vehicle tracking system",
+    "fleet gps"
+  ],
+  "fleet-maintenance": [
+    "fleet maintenance",
+    "fleet maintenance software",
+    "preventive maintenance fleet",
+    "fleet maintenance schedule",
+    "fleet repair costs"
+  ],
+  "fleet-compliance": [
+    "fleet compliance",
+    "fleet safety regulations",
+    "fleet dot compliance",
+    "fleet inspection",
+    "fleet driver qualification"
+  ],
+  "driver-management": [
+    "driver management",
+    "driver retention",
+    "driver training fleet",
+    "driver files",
+    "driver safety program"
+  ],
+  "fleet-fuel": [
+    "fleet fuel management",
+    "fleet fuel cards",
+    "fuel management software",
+    "fleet fuel cost",
+    "fuel card for fleet"
+  ],
+  "telematics": [
+    "telematics",
+    "telematics system",
+    "telematics insurance",
+    "fleet telematics",
+    "telematics device"
+  ],
+  "route-planning": [
+    "route planning",
+    "route optimization software",
+    "route planner",
+    "delivery route optimization",
+    "truck route planning"
+  ],
+  "flatbed": [
+    "flatbed hauling",
+    "flatbed trucking",
+    "flatbed load securement",
+    "flatbed rates",
+    "flatbed tarps"
+  ],
+  "tanker": [
+    "tanker trucking",
+    "tanker endorsement",
+    "tanker loading",
+    "tanker rates",
+    "tanker safety"
+  ],
+  "auto-transport": [
+    "auto transport",
+    "car hauling",
+    "car carrier",
+    "auto transport rates",
+    "enclosed auto transport"
+  ],
+  "dump-truck": [
+    "dump truck",
+    "dump truck business",
+    "dump truck rates",
+    "dump truck parts",
+    "dump truck driving"
+  ],
+  "hotshot": [
+    "hotshot trucking",
+    "hotshot rates",
+    "hotshot loads",
+    "hotshot business",
+    "hotshot insurance"
+  ],
+  "tow-truck": [
+    "tow truck",
+    "tow truck business",
+    "tow truck operator",
+    "tow truck insurance",
+    "towing license"
+  ],
+  "livestock": [
+    "livestock hauling",
+    "livestock trailer",
+    "cattle hauling",
+    "livestock transport regulations",
+    "livestock rates"
+  ],
+  "logging": [
+    "logging truck",
+    "log trucking",
+    "logging truck driver",
+    "log truck regulations",
+    "logging roads"
+  ],
+  "heavy-haul": [
+    "heavy haul",
+    "oversize load",
+    "superload",
+    "heavy haul permits",
+    "heavy haul escort"
+  ],
+  "box-truck": [
+    "box truck",
+    "box truck business",
+    "box truck loads",
+    "box truck insurance",
+    "box truck driving jobs"
+  ],
+  "freight-rates": [
+    "freight rates",
+    "trucking rates per mile",
+    "freight rate trends",
+    "rate per mile 2026",
+    "freight rate index"
+  ],
+  "spot-rates": [
+    "spot rates",
+    "spot market freight",
+    "spot rate vs contract",
+    "spot market trucking",
+    "load rates today"
+  ],
+  "contract-rates": [
+    "contract rates",
+    "contract freight",
+    "dedicated contract carriage",
+    "contract rate negotiation",
+    "shipper contracts"
+  ],
+  "ltl-vs-ftl": [
+    "ltl vs ftl",
+    "less than truckload",
+    "full truckload",
+    "ltl shipping",
+    "ltl rates"
+  ],
+  "freight-forwarding": [
+    "freight forwarding",
+    "freight forwarder",
+    "freight forwarding companies",
+    "freight forwarding software",
+    "air freight forwarding"
+  ],
+  "customs-brokerage": [
+    "customs broker",
+    "customs brokerage",
+    "customs broker license",
+    "import customs clearance",
+    "customs broker fees"
+  ],
+  "buying-a-truck": [
+    "buying a truck",
+    "used truck buying guide",
+    "buy a truck for trucking",
+    "truck dealership",
+    "truck buying checklist"
+  ],
+  "selling-a-truck": [
+    "selling a truck",
+    "sell my truck",
+    "truck trade in",
+    "selling a semi truck",
+    "truck resale"
+  ],
+  "new-vs-used": [
+    "new vs used truck",
+    "new truck price",
+    "used truck prices",
+    "truck depreciation",
+    "new truck warranty"
+  ],
+  "truck-auctions": [
+    "truck auctions",
+    "semi truck auction",
+    "used truck auctions",
+    "truck auction near me",
+    "government truck auction"
+  ],
+  "truck-value": [
+    "truck resale value",
+    "semi truck value",
+    "truck blue book",
+    "truck value guide",
+    "truck depreciation rate"
+  ],
+  "driver-health": [
+    "truck driver health",
+    "truck driver diet",
+    "truck driver exercise",
+    "truck driver sleep",
+    "truck driver back pain"
+  ],
+  "women-in-trucking": [
+    "women in trucking",
+    "female truck driver",
+    "women trucking companies",
+    "women cdl training",
+    "women truck driver safety"
+  ]
 }

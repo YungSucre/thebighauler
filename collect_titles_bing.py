@@ -9,16 +9,18 @@ import json, time, urllib.request, urllib.parse, os, sys, pathlib
 ANGLES = [
     "how to {s}",
     "best {s}",
-    "when to plant {s}",
+    "what is {s}",
     "why is my {s}",
     "{s} problems",
     "{s} for beginners",
-    "how much {s}",
+    "how much does {s} cost",
     "{s} vs",
     "how long does {s} take",
     "common {s}",
-    "how to grow {s}",
     "tips for {s}",
+    "how to choose {s}",
+    "{s} requirements",
+    "{s} software",
 ]
 
 def suggest_bing(q):
