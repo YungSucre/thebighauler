@@ -1,0 +1,242 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../config";
+
+const updated = "August 22, 2026";
+---
+
+<BaseLayout
+  title="Truck Loan Calculator (2026) — Semi Truck Payment &amp; Financing"
+  description="Calculate your semi truck payment: price, down payment, trade-in, interest rate, and loan term. See the monthly payment, total interest, and what it means for your cost per mile."
+  canonical={`${SITE.url}/calculators/truck-loan/`}
+>
+  <div class="calc-hero">
+    <div class="container">
+      <span class="eyebrow">Free Trucking Calculator</span>
+      <h1>Truck Loan Calculator</h1>
+      <p class="lead">
+        See your <strong>monthly truck payment</strong> before you sign. Enter price,
+        down payment, trade-in, rate, and term — plus a <strong>cost-per-mile
+        impact</strong> so you know what the truck really costs per mile.
+      </p>
+      <div class="updated-badge" title="Standard amortization formula">
+        ⚡ Updated {updated} · free forever
+      </div>
+    </div>
+  </div>
+
+  <div class="container calc-body">
+    <section class="calc-card">
+      <h2>Loan details</h2>
+      <div class="form-grid">
+        <label>Truck price ($)<input id="price" type="number" inputmode="decimal" min="0" step="1000" value="120000" /></label>
+        <label>Down payment ($)<input id="down" type="number" inputmode="decimal" min="0" step="500" value="20000" /></label>
+        <label>Trade-in value ($)<input id="trade" type="number" inputmode="decimal" min="0" step="500" value="15000" /></label>
+        <label>Interest rate (% APR)<input id="rate" type="number" inputmode="decimal" min="0" step="0.1" value="7.5" /></label>
+        <label>Term (months)<input id="months" type="number" inputmode="numeric" min="12" max="120" step="12" value="60" /></label>
+        <label>Miles per year (for $/mile)<input id="miles" type="number" inputmode="numeric" min="0" step="1000" value="100000" /></label>
+      </div>
+    </section>
+
+    <section class="calc-card" id="results">
+      <h2>Your payment</h2>
+      <div class="result-summary">
+        <div class="r-box r-box-main">
+          <span class="r-label">Monthly payment</span>
+          <span class="r-value" id="rMonthly">—</span>
+        </div>
+        <div class="r-box">
+          <span class="r-label">Amount financed</span>
+          <span class="r-value" id="rFinanced">—</span>
+        </div>
+        <div class="r-box">
+          <span class="r-label">Total interest</span>
+          <span class="r-value" id="rInterest">—</span>
+        </div>
+        <div class="r-box">
+          <span class="r-label">Payment per mile</span>
+          <span class="r-value" id="rPerMile">—</span>
+        </div>
+      </div>
+      <p class="note" id="rNote"></p>
+    </section>
+  </div>
+
+  <!-- CONTENU ÉDITORIAL (SEO) -->
+  <div class="container">
+    <section class="editorial">
+      <h2>What your truck payment really costs</h2>
+      <p>
+        A $120,000 semi truck is not a $120,000 decision — it is a monthly payment
+        that shows up in your cost per mile for five to seven years. This calculator
+        shows the payment, the total interest, and the per-mile impact so you can
+        compare it against the loads you actually run.
+      </p>
+      <p>
+        The per-mile figure is the key number most buyers skip: at 100,000 miles a
+        year, a $2,400 monthly payment adds about 29 cents to every mile you drive.
+        Add fuel, maintenance, and insurance, and you can see why owner-operators who
+        skip this math end up working for the bank.
+      </p>
+
+      <h2>How to use it</h2>
+      <ul>
+        <li>
+          <strong>Truck price:</strong> what the dealer quotes. Used class 8 trucks
+          commonly run $60,000-$150,000 depending on age, miles, and spec.
+        </li>
+        <li>
+          <strong>Down payment:</strong> 10-20% is typical; more lowers the payment and
+          the interest.
+        </li>
+        <li>
+          <strong>Rate:</strong> commercial truck loans in 2026 typically run 6-10% APR
+          depending on credit and the lender.
+        </li>
+        <li>
+          <strong>Term:</strong> 48-84 months is common. Longer terms lower the payment
+          but add thousands in interest.
+        </li>
+        <li>
+          <strong>Miles per year:</strong> used for the per-mile cost. Use your real
+          loaded miles, not the odometer total.
+        </li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        <details>
+          <summary>What is a good down payment on a semi truck?</summary>
+          <p>
+            Lenders typically want 10-20% down. A bigger down payment matters more than
+            a slightly better rate — it directly reduces the financed amount and the
+            interest you pay over the life of the loan.
+          </p>
+        </details>
+        <details>
+          <summary>Should I finance or lease a truck?</summary>
+          <p>
+            Financing builds equity and is best if you plan to keep the truck long-term.
+            Leasing means lower payments and a newer truck but no equity — you are
+            renting. Owner-operators who run high miles usually finance; those who
+            want warranty coverage and lower payments often lease.
+          </p>
+        </details>
+        <details>
+          <summary>How much truck payment can I afford?</summary>
+          <p>
+            A common rule: your truck payment should be under 15% of gross revenue.
+            At $180,000/year gross (about $2.25/mile at 80,000 miles), that is up to
+            $2,250/month. Run your own numbers with this calculator and compare against
+            your actual revenue.
+          </p>
+        </details>
+        <details>
+          <summary>Do I need a business credit score?</summary>
+          <p>
+            Most commercial truck lenders use your personal credit (FICO 600+ is often
+            the floor) plus your business history and bank statements. New owner-
+            operators with no history typically need a stronger down payment or a
+            co-signer.
+          </p>
+        </details>
+        <details>
+          <summary>What happens at the end of the loan?</summary>
+          <p>
+            The truck is yours — and worth whatever the market says. Many
+            owner-operators keep running it for years after payoff, which is when the
+            payment line drops out of the cost per mile and margins jump.
+          </p>
+        </details>
+      </div>
+    </section>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div class="container">
+    <section class="method">
+      <h2>Methodology</h2>
+      <p>
+        Standard amortizing loan formula: M = P × r(1+r)ⁿ / ((1+r)ⁿ − 1), where P is
+        the financed amount, r the monthly rate (APR ÷ 12), and n the number of months.
+        Per-mile figure = monthly payment × 12 ÷ annual miles. Rates shown are
+        typical 2026 commercial truck loan ranges; your actual rate depends on credit,
+        lender, and market conditions.
+      </p>
+      <p class="disclaimer">Planning tool, not financial advice. Confirm terms with your lender.</p>
+    </section>
+  </div>
+
+  <style>
+    .calc-hero { background: linear-gradient(120deg, #1c2a3a 0%, #2c4a63 70%, #3a6390 100%); color: #fff; padding: 2.2rem 0 2rem; border-radius: 14px; margin: 0 0 1.6rem; }
+    .calc-hero .container { max-width: 900px; margin: 0 auto; padding: 0 1.2rem; }
+    .calc-hero .eyebrow { display: inline-block; background: rgba(255,255,255,.14); color: #ffd9a0; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: .3rem .7rem; border-radius: 6px; margin-bottom: .8rem; }
+    .calc-hero h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin: 0 0 .6rem; line-height: 1.15; }
+    .calc-hero .lead { font-size: 1.02rem; color: #e2ecf5; max-width: 680px; margin: 0 0 1rem; line-height: 1.55; }
+    .updated-badge { display: inline-block; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); color: #eaf4fb; font-size: .82rem; padding: .35rem .8rem; border-radius: 8px; }
+    .calc-body { max-width: 900px; margin: 0 auto; padding: 0 1.2rem; }
+    .calc-card { background: #fff; border: 1px solid #dfe4ea; border-radius: 12px; padding: 1.4rem 1.5rem; margin-bottom: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+    .calc-card h2 { margin: 0 0 .9rem; font-size: 1.2rem; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .9rem; }
+    .form-grid label { font-size: .85rem; font-weight: 600; color: #333; }
+    .form-grid input { display: block; width: 100%; margin-top: .3rem; padding: .6rem .8rem; font-size: .95rem; border: 2px solid #c9d2dc; border-radius: 8px; font-family: inherit; }
+    .form-grid input:focus { outline: none; border-color: #2c4a63; }
+    .result-summary { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .r-box { flex: 1 1 170px; background: #f3f7fb; border: 1px solid #d8e3ee; border-radius: 10px; padding: .9rem 1rem; text-align: center; }
+    .r-box-main { background: #1c2a3a; border-color: #1c2a3a; }
+    .r-label { display: block; font-size: .75rem; color: #4a6a85; font-weight: 600; }
+    .r-box-main .r-label { color: #a8c4dd; }
+    .r-value { display: block; font-size: 1.3rem; font-weight: 800; color: #1c2a3a; margin: .25rem 0; }
+    .r-box-main .r-value { color: #ffb85c; }
+    .note { color: #55544e; font-size: .85rem; margin: .8rem 0 0; line-height: 1.5; }
+    .editorial { max-width: 900px; margin: 0 auto 2rem; padding: 0 1.2rem; }
+    .editorial h2 { font-size: 1.25rem; margin: 2rem 0 .7rem; }
+    .editorial p, .editorial li { font-size: .95rem; color: #3d3d38; line-height: 1.65; }
+    .editorial ul { padding-left: 1.3rem; }
+    .faq details { border: 1px solid #dfe4ea; border-radius: 10px; padding: .8rem 1rem; margin-bottom: .6rem; background: #fff; }
+    .faq summary { font-weight: 700; cursor: pointer; color: #1c2a3a; font-size: .95rem; }
+    .faq details p { margin: .6rem 0 0; font-size: .9rem; color: #55544e; line-height: 1.6; }
+    .method { max-width: 900px; margin: 0 auto 2rem; padding: 0 1.2rem; }
+    .method p { font-size: .92rem; color: #3d3d38; line-height: 1.6; }
+    .disclaimer { font-size: .82rem; color: #7a7870; font-style: italic; }
+  </style>
+
+  <script>
+    import { computeLoan } from "../../lib/loan";
+    const $ = (id: string) => document.getElementById(id)!;
+    const fmt = (n: number) => "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+    const fmt2 = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function recalc() {
+      const i = {
+        price: parseFloat($("price").value) || 0,
+        down: parseFloat($("down").value) || 0,
+        trade: parseFloat($("trade").value) || 0,
+        rate: parseFloat($("rate").value) || 0,
+        months: parseFloat($("months").value) || 60,
+      };
+      const miles = parseFloat($("miles").value) || 100000;
+      const r = computeLoan(i);
+      $("rMonthly").textContent = fmt2(r.monthly);
+      $("rFinanced").textContent = fmt(r.financed);
+      $("rInterest").textContent = fmt(r.totalInterest);
+      $("rPerMile").textContent = miles > 0 ? fmt2((r.monthly * 12) / miles) : "—";
+      $("rNote").textContent = `${i.months}-month term at ${i.rate}% APR on ${fmt(r.financed)} financed. Total paid: ${fmt(r.totalCost)}. Payment per mile at ${miles.toLocaleString()} mi/yr.`;
+    }
+    ["price", "down", "trade", "rate", "months", "miles"].forEach((id) => $(id).addEventListener("input", recalc));
+    recalc();
+  </script>
+
+  <!-- JSON-LD FAQPage -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a good down payment on a semi truck?", "acceptedAnswer": { "@type": "Answer", "text": "Lenders typically want 10-20% down. A bigger down payment directly reduces the financed amount and the interest you pay over the life of the loan." } },
+      { "@type": "Question", "name": "Should I finance or lease a truck?", "acceptedAnswer": { "@type": "Answer", "text": "Financing builds equity and is best if you plan to keep the truck long-term. Leasing means lower payments and a newer truck but no equity. Owner-operators who run high miles usually finance." } },
+      { "@type": "Question", "name": "How much truck payment can I afford?", "acceptedAnswer": { "@type": "Answer", "text": "A common rule: your truck payment should be under 15% of gross revenue. At $180,000/year gross that is up to $2,250/month. Compare against your actual revenue." } },
+      { "@type": "Question", "name": "Do I need a business credit score?", "acceptedAnswer": { "@type": "Answer", "text": "Most commercial truck lenders use your personal credit (FICO 600+ is often the floor) plus your business history. New owner-operators typically need a stronger down payment or co-signer." } },
+      { "@type": "Question", "name": "What happens at the end of the loan?", "acceptedAnswer": { "@type": "Answer", "text": "The truck is yours — worth whatever the market says. Many owner-operators keep running it for years after payoff, when the payment drops out of the cost per mile and margins jump." } }
+    ]
+  })} />
+</BaseLayout>
