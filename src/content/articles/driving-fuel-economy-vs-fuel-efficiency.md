@@ -6,6 +6,9 @@ verticalName: "Driving"
 slug: "fuel-economy-vs-fuel-efficiency"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/fuel-economy-vs-fuel-efficiency/hero.jpg"
+hero_alt: "Fuel Economy vs Fuel Efficiency"
+hero_credit: "Photo: Engin Akyurt / Pexels"
 affiliate_ready: false
 ---
 

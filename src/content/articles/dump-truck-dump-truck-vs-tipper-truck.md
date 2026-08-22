@@ -6,6 +6,9 @@ verticalName: "Dump Trucks"
 slug: "dump-truck-vs-tipper-truck"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/dump-truck-vs-tipper-truck/hero.jpg"
+hero_alt: "Dump Truck vs Tipper Truck"
+hero_credit: "Photo: Emadul Islam Akash / Pexels"
 affiliate_ready: false
 ---
 

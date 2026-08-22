@@ -1,0 +1,437 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../config";
+import { IFTA_RATES, IFTA_QUARTER, IFTA_UPDATED, IFTA_SOURCE } from "../../data/ifta-rates";
+import { US_STATES } from "../../lib/ifta";
+
+const updated = IFTA_UPDATED;
+---
+
+<BaseLayout
+  title="IFTA Calculator 2026 — Quarterly Fuel Tax by State (3Q2026 Rates)"
+  description="Calculate your IFTA quarterly fuel tax due by state: enter miles and diesel gallons per state, get taxes owed with official 3Q2026 IFTA tax rates (58 jurisdictions, updated August 2026)."
+  canonical={`${SITE.url}/calculators/ifta-calculator/`}
+>
+  <div class="calc-hero">
+    <div class="container">
+      <span class="eyebrow">Free Trucking Calculator</span>
+      <h1>IFTA Tax Calculator</h1>
+      <p class="lead">
+        Estimate your quarterly IFTA fuel tax by state. Enter miles and diesel
+        gallons per jurisdiction, and we compute the taxes due using the
+        <strong>official {IFTA_QUARTER} IFTA tax rates</strong> for all 58 US and
+        Canadian jurisdictions.
+      </p>
+      <div class="updated-badge" title="Source: IFTA, Inc. official Tax Rate Matrix">
+        ⚡ Updated {updated} · {IFTA_QUARTER} rates · free forever
+      </div>
+    </div>
+  </div>
+
+  <div class="container calc-body">
+    <!-- INPUT -->
+    <section class="calc-card" id="input">
+      <h2>1. Enter your quarterly totals</h2>
+      <div class="totals-row">
+        <label>
+          Total miles driven (all states)
+          <input id="totalMiles" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 45000" />
+        </label>
+        <label>
+          Total diesel gallons purchased
+          <input id="totalGallons" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 7500" />
+        </label>
+      </div>
+      <p class="hint">
+        Your average fuel economy (MPG) is computed automatically: total miles ÷ total gallons.
+      </p>
+      <div class="mpg-readout" id="mpgOut">Average MPG: —</div>
+    </section>
+
+    <!-- PER-STATE -->
+    <section class="calc-card" id="states">
+      <h2>2. Miles &amp; gallons by state</h2>
+      <p class="hint">
+        Add a row for each state you drove through. You only need miles; gallons
+        purchased in that state are used as a tax credit.
+      </p>
+      <div class="state-rows" id="stateRows">
+        <!-- lignes ajoutées par JS -->
+      </div>
+      <button id="addState" class="btn-add" type="button">+ Add state</button>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="calc-card" id="results" hidden>
+      <h2>3. Your IFTA estimate</h2>
+      <div class="result-summary">
+        <div class="r-box">
+          <span class="r-label">Total tax due</span>
+          <span class="r-value" id="rDue">$0.00</span>
+        </div>
+        <div class="r-box">
+          <span class="r-label">Total credits</span>
+          <span class="r-value" id="rCredit">$0.00</span>
+        </div>
+        <div class="r-box r-box-main">
+          <span class="r-label">Net due (or credit)</span>
+          <span class="r-value" id="rNet">$0.00</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="calc-table">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Miles</th>
+              <th>Gallons</th>
+              <th>Rate/gal</th>
+              <th>Tax due</th>
+              <th>Credit</th>
+              <th>Net</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+      <p class="note" id="resultNote"></p>
+    </section>
+  </div>
+
+  <!-- CONTENU ÉDITORIAL (SEO) -->
+  <div class="container">
+    <section class="editorial">
+      <h2>What is IFTA and how does the tax work?</h2>
+      <p>
+        The <strong>International Fuel Tax Agreement (IFTA)</strong> is a compact among
+        48 US states and 10 Canadian provinces that simplifies fuel tax reporting for
+        trucking companies and owner-operators. Instead of filing a fuel tax return in
+        every state you drive through, you file one quarterly return with your base
+        jurisdiction. That single return covers all member jurisdictions — but the tax
+        owed is still calculated separately for each one.
+      </p>
+      <p>
+        The idea is simple: you pay tax on the fuel you buy, and you owe tax on the fuel
+        you burn. The difference is settled quarterly:
+      </p>
+      <ul>
+        <li>
+          <strong>Miles per state</strong> — how far you drove in each jurisdiction
+          (from your ELD or trip records).
+        </li>
+        <li>
+          <strong>Average MPG</strong> — your fleet's miles per gallon (total miles ÷
+          total gallons purchased).
+        </li>
+        <li>
+          <strong>Tax rate per state</strong> — each jurisdiction sets its own fuel tax
+          rate, and they change every quarter.
+        </li>
+        <li>
+          <strong>Credits</strong> — the tax you already paid when buying fuel in each
+          state offsets the tax due for miles driven there.
+        </li>
+      </ul>
+
+      <h2>How to read your results</h2>
+      <p>
+        For each state, the calculator computes:
+        <em>tax due = (miles ÷ MPG) × state rate</em>, then subtracts
+        <em>credits = gallons purchased in that state × that state's rate</em>.
+        The net figure is what you owe (or the credit you carry forward) for that
+        jurisdiction. The final number at the top is your total net position for the
+        quarter — what you would pay on your IFTA return before any base-jurisdiction
+        adjustments.
+      </p>
+      <p>
+        <strong>Important:</strong> this is an estimate for planning. Your actual return
+        must be filed through your base jurisdiction's portal, and rates are finalized
+        by each state. Always confirm against the official IFTA matrix for your filing
+        quarter.
+      </p>
+
+      <h2>IFTA tax rates by state — {IFTA_QUARTER}</h2>
+      <p>
+        The full rate table used by this calculator, straight from the official IFTA
+        matrix. Rates are in US dollars per gallon of diesel.
+      </p>
+      <div class="table-wrap">
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Diesel rate/gal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(IFTA_RATES)
+              .filter(([ab]) => US_STATES.includes(ab))
+              .sort((a, b) => (b[1].diesel ?? 0) - (a[1].diesel ?? 0))
+              .map(([ab, r]) => (
+                <tr>
+                  <td>{r.name} ({ab})</td>
+                  <td>{r.diesel !== null ? `$${r.diesel.toFixed(4)}` : "See ODOT"}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        <details>
+          <summary>How often do I file IFTA?</summary>
+          <p>
+            IFTA returns are filed quarterly: January–March, April–June, July–September,
+            and October–December. The deadline is the last day of the month following the
+            end of the quarter (April 30, July 31, October 31, January 31).
+          </p>
+        </details>
+        <details>
+          <summary>What happens if I have a credit?</summary>
+          <p>
+            If your credits exceed taxes due in a jurisdiction (you bought more fuel
+            there than you burned), the excess credit carries forward to the next
+            quarter's return. You do not get a check from most states — it offsets
+            future taxes.
+          </p>
+        </details>
+        <details>
+          <summary>Do I need IFTA for a truck that never leaves my state?</summary>
+          <p>
+            If you only operate within one state, you likely file that state's
+            intrastate fuel tax instead of IFTA. IFTA applies to vehicles registered for
+            interstate travel (typically over 26,000 lb GVW or with 3+ axles).
+          </p>
+        </details>
+        <details>
+          <summary>How do I track miles per state?</summary>
+          <p>
+            Your ELD logs record state boundaries automatically in most systems. Paper
+            trip sheets are also accepted if they meet the requirements — the key is
+            consistent, documented mileage per jurisdiction for the quarter.
+          </p>
+        </details>
+        <details>
+          <summary>What is the 2290 form?</summary>
+          <p>
+            Form 2290 is the IRS Heavy Highway Vehicle Use Tax return — a separate
+            federal tax on vehicles over 55,000 lb, filed annually in July. It is not
+            part of IFTA but is often mentioned in the same breath because both apply
+            to heavy trucks. The rates differ and they are paid to different agencies.
+          </p>
+        </details>
+      </div>
+    </section>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div class="container">
+    <section class="method">
+      <h2>Methodology &amp; sources</h2>
+      <p>
+        Tax rates come from the <strong>{IFTA_SOURCE}</strong> for {IFTA_QUARTER},
+        retrieved August 2026. Rates are per US gallon of diesel (the "special diesel"
+        column). Where a jurisdiction leaves the rate blank in the official matrix
+        (Oregon), the table says "See ODOT" rather than guessing.
+      </p>
+      <p class="disclaimer">
+        This calculator is a planning tool, not tax advice. Filing requirements,
+        deadlines, and rates change; always verify with your base jurisdiction's
+        IFTA portal before filing.
+      </p>
+    </section>
+  </div>
+
+  <style>
+    .calc-hero {
+      background: linear-gradient(120deg, #1c2a3a 0%, #2c4a63 70%, #3a6390 100%);
+      color: #fff; padding: 2.2rem 0 2rem; border-radius: 14px; margin: 0 0 1.6rem;
+    }
+    .calc-hero .container { max-width: 900px; margin: 0 auto; padding: 0 1.2rem; }
+    .calc-hero .eyebrow {
+      display: inline-block; background: rgba(255,255,255,.14); color: #ffd9a0;
+      font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; padding: .3rem .7rem; border-radius: 6px; margin-bottom: .8rem;
+    }
+    .calc-hero h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin: 0 0 .6rem; line-height: 1.15; }
+    .calc-hero .lead { font-size: 1.02rem; color: #e2ecf5; max-width: 680px; margin: 0 0 1rem; line-height: 1.55; }
+    .updated-badge {
+      display: inline-block; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+      color: #eaf4fb; font-size: .82rem; padding: .35rem .8rem; border-radius: 8px;
+    }
+    .calc-body { max-width: 900px; margin: 0 auto; padding: 0 1.2rem; }
+    .calc-card {
+      background: #fff; border: 1px solid #dfe4ea; border-radius: 12px;
+      padding: 1.4rem 1.5rem; margin-bottom: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    }
+    .calc-card h2 { margin: 0 0 .9rem; font-size: 1.2rem; }
+    .totals-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .totals-row label { flex: 1 1 220px; font-size: .9rem; font-weight: 600; color: #333; }
+    .totals-row input {
+      display: block; width: 100%; margin-top: .35rem; padding: .65rem .8rem; font-size: 1rem;
+      border: 2px solid #c9d2dc; border-radius: 8px; font-family: inherit;
+    }
+    .totals-row input:focus { outline: none; border-color: #2c4a63; }
+    .mpg-readout {
+      margin-top: .8rem; font-size: .95rem; font-weight: 700; color: #2c4a63;
+      background: #eef4f9; padding: .5rem .8rem; border-radius: 8px; display: inline-block;
+    }
+    .hint { color: #6b6a63; font-size: .85rem; margin: .6rem 0 0; }
+    .state-rows { margin: .8rem 0; }
+    .state-row {
+      display: flex; gap: .6rem; align-items: center; margin-bottom: .55rem; flex-wrap: wrap;
+    }
+    .state-row select {
+      flex: 0 1 200px; padding: .55rem .6rem; border: 1px solid #c9d2dc; border-radius: 8px; font-family: inherit;
+    }
+    .state-row input {
+      flex: 0 1 130px; padding: .55rem .7rem; border: 1px solid #c9d2dc; border-radius: 8px; font-family: inherit;
+    }
+    .state-row .rm { background: none; border: none; color: #a33; cursor: pointer; font-size: 1rem; padding: .3rem; }
+    .btn-add {
+      background: #fff; border: 2px dashed #2c4a63; color: #2c4a63; font-weight: 700;
+      padding: .55rem 1.2rem; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: .9rem;
+    }
+    .btn-add:hover { background: #eef4f9; }
+    .result-summary { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .r-box {
+      flex: 1 1 180px; background: #f3f7fb; border: 1px solid #d8e3ee; border-radius: 10px;
+      padding: .9rem 1rem; text-align: center;
+    }
+    .r-box-main { background: #1c2a3a; border-color: #1c2a3a; }
+    .r-label { display: block; font-size: .78rem; color: #4a6a85; font-weight: 600; }
+    .r-box-main .r-label { color: #a8c4dd; }
+    .r-value { display: block; font-size: 1.4rem; font-weight: 800; color: #1c2a3a; margin: .25rem 0; }
+    .r-box-main .r-value { color: #ffb85c; }
+    .table-wrap { overflow-x: auto; }
+    .calc-table, .ref-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .calc-table th, .ref-table th {
+      text-align: left; background: #f0f2f5; padding: .55rem .7rem;
+      font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: #4a4a44;
+    }
+    .calc-table td, .ref-table td { padding: .5rem .7rem; border-bottom: 1px solid #eceff2; }
+    .note { color: #55544e; font-size: .85rem; margin: .8rem 0 0; line-height: 1.5; }
+    .editorial { max-width: 900px; margin: 0 auto 2rem; padding: 0 1.2rem; }
+    .editorial h2 { font-size: 1.25rem; margin: 2rem 0 .7rem; }
+    .editorial p, .editorial li { font-size: .95rem; color: #3d3d38; line-height: 1.65; }
+    .editorial ul { padding-left: 1.3rem; }
+    .faq details { border: 1px solid #dfe4ea; border-radius: 10px; padding: .8rem 1rem; margin-bottom: .6rem; background: #fff; }
+    .faq summary { font-weight: 700; cursor: pointer; color: #1c2a3a; font-size: .95rem; }
+    .faq details p { margin: .6rem 0 0; font-size: .9rem; color: #55544e; line-height: 1.6; }
+    .method { max-width: 900px; margin: 0 auto 2rem; padding: 0 1.2rem; }
+    .method p { font-size: .92rem; color: #3d3d38; line-height: 1.6; }
+    .disclaimer { font-size: .82rem; color: #7a7870; font-style: italic; }
+    @media (max-width: 600px) {
+      .state-row select { flex: 1 1 100%; }
+      .state-row input { flex: 1 1 45%; }
+    }
+  </style>
+
+  <script>
+    import { US_STATES, computeIfta } from "../../lib/ifta";
+    import { IFTA_RATES } from "../../data/ifta-rates";
+
+    const $ = (id: string) => document.getElementById(id)!;
+    let rows: { abbr: string; miles: number; gallons: number }[] = [];
+
+    function addRow(abbr = "TX", miles = 0, gallons = 0) {
+      const div = document.createElement("div");
+      div.className = "state-row";
+      div.innerHTML = `
+        <select class="row-state">
+          ${US_STATES.map((s) => `<option value="${s}" ${s === abbr ? "selected" : ""}>${IFTA_RATES[s].name} (${s})</option>`).join("")}
+        </select>
+        <input class="row-miles" type="number" inputmode="decimal" min="0" step="1" placeholder="Miles" value="${miles || ""}" />
+        <input class="row-gallons" type="number" inputmode="decimal" min="0" step="any" placeholder="Gallons bought" value="${gallons || ""}" />
+        <button class="rm" type="button" aria-label="Remove row">✕</button>
+      `;
+      div.querySelector(".rm")!.addEventListener("click", () => { div.remove(); recalc(); });
+      div.querySelectorAll("input, select").forEach((el) => el.addEventListener("input", recalc));
+      $("stateRows").appendChild(div);
+      recalc();
+    }
+
+    function recalc() {
+      const totalMiles = parseFloat($("totalMiles").value) || 0;
+      const totalGallons = parseFloat($("totalGallons").value) || 0;
+      const mpg = totalGallons > 0 ? totalMiles / totalGallons : 0;
+      $("mpgOut").textContent = mpg > 0 ? `Average MPG: ${mpg.toFixed(2)}` : "Average MPG: —";
+
+      // collecte les lignes
+      rows = Array.from(document.querySelectorAll(".state-row")).map((r) => ({
+        abbr: (r.querySelector(".row-state") as HTMLSelectElement).value,
+        miles: parseFloat((r.querySelector(".row-miles") as HTMLInputElement).value) || 0,
+        gallons: parseFloat((r.querySelector(".row-gallons") as HTMLInputElement).value) || 0,
+      }));
+
+      if (!totalMiles || rows.length === 0) { $("results").hidden = true; return; }
+
+      const milesByState: Record<string, number> = {};
+      const gallonsByState: Record<string, number> = {};
+      for (const r of rows) {
+        milesByState[r.abbr] = (milesByState[r.abbr] || 0) + r.miles;
+        gallonsByState[r.abbr] = (gallonsByState[r.abbr] || 0) + r.gallons;
+      }
+      const res = computeIfta({ milesByState, gallonsByState, totalGallons, totalMiles });
+      $("rDue").textContent = `$${res.totalTaxDue.toFixed(2)}`;
+      $("rCredit").textContent = `$${res.totalCredit.toFixed(2)}`;
+      $("rNet").textContent = res.totalNet >= 0 ? `$${res.totalNet.toFixed(2)} due` : `$${Math.abs(res.totalNet).toFixed(2)} credit`;
+      const body = $("resultBody");
+      body.innerHTML = "";
+      for (const l of res.lines) {
+        body.insertAdjacentHTML("beforeend", `
+          <tr>
+            <td>${l.name} (${l.abbr})</td>
+            <td>${l.miles.toLocaleString()}</td>
+            <td>${l.gallons.toLocaleString()}</td>
+            <td>${l.rate !== null ? "$" + l.rate.toFixed(4) : "See ODOT"}</td>
+            <td>$${l.taxDue.toFixed(2)}</td>
+            <td>$${l.credit.toFixed(2)}</td>
+            <td>${l.net >= 0 ? "$" + l.net.toFixed(2) : "($" + Math.abs(l.net).toFixed(2) + ")"}</td>
+          </tr>`);
+      }
+      $("resultNote").textContent = `Rates: ${IFTA_RATES ? "official 3Q2026 IFTA matrix" : ""}. Estimate for planning only — confirm with your base jurisdiction before filing.`;
+      $("results").hidden = false;
+    }
+
+    $("totalMiles").addEventListener("input", recalc);
+    $("totalGallons").addEventListener("input", recalc);
+    $("addState").addEventListener("click", () => addRow());
+    // ligne de départ : Texas
+    addRow("TX");
+  </script>
+
+  <!-- JSON-LD FAQPage -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How often do I file IFTA?",
+        "acceptedAnswer": { "@type": "Answer", "text": "IFTA returns are filed quarterly: January-March, April-June, July-September, and October-December. The deadline is the last day of the month following the end of the quarter (April 30, July 31, October 31, January 31)." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I have a credit?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If your credits exceed taxes due in a jurisdiction, the excess credit carries forward to the next quarter's return. It offsets future taxes rather than generating a refund from most states." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need IFTA for a truck that never leaves my state?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you only operate within one state, you likely file that state's intrastate fuel tax instead of IFTA. IFTA applies to vehicles registered for interstate travel, typically over 26,000 lb GVW or with 3+ axles." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I track miles per state?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your ELD logs record state boundaries automatically in most systems. Paper trip sheets are also accepted if they meet the requirements — the key is consistent, documented mileage per jurisdiction for the quarter." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the 2290 form?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Form 2290 is the IRS Heavy Highway Vehicle Use Tax return — a separate federal tax on vehicles over 55,000 lb, filed annually in July. It is not part of IFTA but applies to the same heavy trucks." }
+      }
+    ]
+  })} />
+</BaseLayout>
