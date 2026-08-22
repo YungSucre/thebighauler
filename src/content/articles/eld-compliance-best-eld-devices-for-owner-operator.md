@@ -6,6 +6,9 @@ verticalName: "ELD Compliance"
 slug: "best-eld-devices-for-owner-operator"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-eld-devices-for-owner-operator/hero.jpg"
+hero_alt: "Best ELD Devices for Owner Operator"
+hero_credit: "Photo: taha balta / Pexels"
 affiliate_ready: false
 ---
 

@@ -6,6 +6,9 @@ verticalName: "TMS & Dispatch Software"
 slug: "best-free-dispatch-platform"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-free-dispatch-platform/hero.jpg"
+hero_alt: "Best Free Dispatch Platform"
+hero_credit: "Photo: Kampus Production / Pexels"
 affiliate_ready: false
 ---
 

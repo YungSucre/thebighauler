@@ -6,6 +6,9 @@ verticalName: "ELD Compliance"
 slug: "average-ifta-fuel-tax-cost"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/average-ifta-fuel-tax-cost/hero.jpg"
+hero_alt: "Average IFTA Fuel Tax Cost"
+hero_credit: "Photo: Erik Mclean / Pexels"
 affiliate_ready: false
 ---
 

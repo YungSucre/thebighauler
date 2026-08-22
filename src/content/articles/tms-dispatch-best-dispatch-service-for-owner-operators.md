@@ -6,6 +6,9 @@ verticalName: "TMS & Dispatch Software"
 slug: "best-dispatch-service-for-owner-operators"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-dispatch-service-for-owner-operators/hero.jpg"
+hero_alt: "Best Dispatch Service for Owner Operators"
+hero_credit: "Photo: Tima Miroshnichenko / Pexels"
 affiliate_ready: false
 ---
 

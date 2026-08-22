@@ -6,6 +6,9 @@ verticalName: "ELD Compliance"
 slug: "approved-eld-devices"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/approved-eld-devices/hero.jpg"
+hero_alt: "Approved ELD Devices"
+hero_credit: "Photo: REINER  SCT / Pexels"
 affiliate_ready: false
 ---
 

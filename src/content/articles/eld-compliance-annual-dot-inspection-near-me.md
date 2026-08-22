@@ -6,6 +6,9 @@ verticalName: "ELD Compliance"
 slug: "annual-dot-inspection-near-me"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/annual-dot-inspection-near-me/hero.jpg"
+hero_alt: "Annual DOT Inspection Near Me"
+hero_credit: "Photo: Gustavo Fring / Pexels"
 affiliate_ready: false
 ---
 

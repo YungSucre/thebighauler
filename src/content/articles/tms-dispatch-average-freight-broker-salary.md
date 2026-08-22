@@ -6,6 +6,9 @@ verticalName: "TMS & Dispatch Software"
 slug: "average-freight-broker-salary"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/average-freight-broker-salary/hero.jpg"
+hero_alt: "Average Freight Broker Salary"
+hero_credit: "Photo: Natasha Chebanoo / Pexels"
 affiliate_ready: false
 ---
 

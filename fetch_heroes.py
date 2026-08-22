@@ -4,12 +4,14 @@ Règle pipeline : 1 hero + 2 images de section minimum par article.
 Recherche Pexels par mots-clés du titre, télécharge, écrit le frontmatter hero_image.
 Sortie : src/content/articles/*.md mis à jour + public/images/articles/<slug>/hero.jpg
 """
-import json, os, re, sys, time, urllib.request
+import json, os, re, sys, time, urllib.request, urllib.parse
 from pathlib import Path
 
 ROOT = Path("/root/thebighauler")
 CONTENT = ROOT / "src" / "content" / "articles"
 IMAGES = ROOT / "public" / "images" / "articles"
+
+UA_FULL = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
 
 def get_pexels_key():
     for p in ["/root/niche-finder/.env", "/root/.hermes/.env"]:
@@ -24,12 +26,12 @@ KEY = get_pexels_key()
 def pexels_search(q):
     url = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode(
         {"query": q, "per_page": 3, "orientation": "landscape"})
-    req = urllib.request.Request(url, headers={"Authorization": KEY, "User-Agent": "pop/0.1"})
+    req = urllib.request.Request(url, headers={"Authorization": KEY, "User-Agent": UA_FULL})
     with urllib.request.urlopen(req, timeout=25) as r:
         return json.loads(r.read()).get("photos", [])
 
 def download(url, dest):
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": UA_FULL})
     with urllib.request.urlopen(req, timeout=40) as r:
         data = r.read()
     if len(data) < 20000 or data[:2] != b"\xff\xd8":
@@ -44,8 +46,8 @@ def article_keywords(title):
             "are", "is", "do", "in", "of", "and", "with", "saves", "probably", "missing"}
     words = [w.lower() for w in re.findall(r"[A-Za-z]+", title)]
     kw = [w for w in words if w not in stop and len(w) > 3]
-    # domaine générique : practice office / profession
-    return kw[:4] or ["office"]
+    # domaine générique : trucking / route
+    return kw[:4] or ["semi truck highway"]
 
 def main():
     if not KEY:
@@ -65,14 +67,14 @@ def main():
             continue
         title = m.group(1)
         m2 = re.search(r'slug: "([^"]+)"', fm)
-        slug = m2.group(1) if m2 else f.replace(".md", "").split("-", 1)[1]
+        slug = m2.group(1) if m2 else f.replace(".md", "")
         kw = article_keywords(title)
         q = " ".join(kw)
         print(f"  {f[:50]}... q='{q}'", flush=True)
         try:
             photos = pexels_search(q)
             if not photos:
-                photos = pexels_search("professional office")
+                photos = pexels_search("semi truck highway")
             if not photos:
                 print("    pas de photo", flush=True)
                 continue

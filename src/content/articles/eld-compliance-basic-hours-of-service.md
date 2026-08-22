@@ -6,6 +6,9 @@ verticalName: "ELD Compliance"
 slug: "basic-hours-of-service"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/basic-hours-of-service/hero.jpg"
+hero_alt: "Basic Hours of Service"
+hero_credit: "Photo: cottonbro studio / Pexels"
 affiliate_ready: false
 ---
 

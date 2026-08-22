@@ -6,6 +6,9 @@ verticalName: "TMS & Dispatch Software"
 slug: "best-dispatch-software-for-trucking-companies"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-dispatch-software-for-trucking-companies/hero.jpg"
+hero_alt: "Best Dispatch Software for Trucking Companies"
+hero_credit: "Photo: Artem Podrez / Pexels"
 affiliate_ready: false
 ---
 

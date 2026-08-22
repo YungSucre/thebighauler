@@ -6,6 +6,9 @@ verticalName: "TMS & Dispatch Software"
 slug: "best-carrier-tms-software"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-carrier-tms-software/hero.jpg"
+hero_alt: "Best Carrier TMS Software"
+hero_credit: "Photo: ThisIsEngineering / Pexels"
 affiliate_ready: false
 ---
 

@@ -6,6 +6,9 @@ verticalName: "ELD Compliance"
 slug: "best-eld-devices-for-hotshot-trucks"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-eld-devices-for-hotshot-trucks/hero.jpg"
+hero_alt: "Best ELD devices for hotshot trucks"
+hero_credit: "Photo: Omar Gerardo / Pexels"
 affiliate_ready: false
 ---
 

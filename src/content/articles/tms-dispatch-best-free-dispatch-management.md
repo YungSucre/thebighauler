@@ -6,6 +6,9 @@ verticalName: "TMS & Dispatch Software"
 slug: "best-free-dispatch-management"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-free-dispatch-management/hero.jpg"
+hero_alt: "Best Free Dispatch Management"
+hero_credit: "Photo: Tima Miroshnichenko / Pexels"
 affiliate_ready: false
 ---
 

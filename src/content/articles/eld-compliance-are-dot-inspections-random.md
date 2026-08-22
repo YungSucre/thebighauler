@@ -6,6 +6,9 @@ verticalName: "ELD Compliance"
 slug: "are-dot-inspections-random"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/are-dot-inspections-random/hero.jpg"
+hero_alt: "Are DOT Inspections Random"
+hero_credit: "Photo: Hoan Ngọc / Pexels"
 affiliate_ready: false
 ---
 
