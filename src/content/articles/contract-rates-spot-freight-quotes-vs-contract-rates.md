@@ -6,6 +6,9 @@ verticalName: "Contract Rates"
 slug: "spot-freight-quotes-vs-contract-rates"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/spot-freight-quotes-vs-contract-rates/hero.jpg"
+hero_alt: "Spot Freight Quotes vs Contract Rates"
+hero_credit: "Photo: Tima Miroshnichenko / Pexels"
 affiliate_ready: false
 ---
 

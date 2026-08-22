@@ -6,6 +6,9 @@ verticalName: "Drayage"
 slug: "drayage-vs-cartage"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/drayage-vs-cartage/hero.jpg"
+hero_alt: "Drayage vs Cartage"
+hero_credit: "Photo: David McElwee / Pexels"
 affiliate_ready: false
 ---
 

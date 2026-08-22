@@ -6,6 +6,9 @@ verticalName: "Commercial Auto"
 slug: "commercial-auto-insurance-vs-personal-auto"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/commercial-auto-insurance-vs-personal-auto/hero.jpg"
+hero_alt: "Commercial Auto Insurance vs Personal Auto"
+hero_credit: "Photo: Mikhail Nilov / Pexels"
 affiliate_ready: false
 ---
 

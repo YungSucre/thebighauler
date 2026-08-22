@@ -6,6 +6,9 @@ verticalName: "Dispatch Services"
 slug: "despatch-vs-dispatch-uk"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/despatch-vs-dispatch-uk/hero.jpg"
+hero_alt: "Despatch vs Dispatch UK"
+hero_credit: "Photo: Kampus Production / Pexels"
 affiliate_ready: false
 ---
 

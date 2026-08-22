@@ -6,6 +6,9 @@ verticalName: "Drayage"
 slug: "drayage-vs-demurrage"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/drayage-vs-demurrage/hero.jpg"
+hero_alt: "Drayage vs Demurrage"
+hero_credit: "Photo: Defrino Maasy / Pexels"
 affiliate_ready: false
 ---
 

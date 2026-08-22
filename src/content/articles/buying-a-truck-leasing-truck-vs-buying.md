@@ -6,6 +6,9 @@ verticalName: "Buying a Truck"
 slug: "leasing-truck-vs-buying"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/leasing-truck-vs-buying/hero.jpg"
+hero_alt: "Leasing Truck vs Buying"
+hero_credit: "Photo: Vitaly Gariev / Pexels"
 affiliate_ready: false
 ---
 

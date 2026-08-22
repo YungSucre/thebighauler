@@ -6,6 +6,9 @@ verticalName: "Drayage"
 slug: "ddp-vs-drayage-costs"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/ddp-vs-drayage-costs/hero.jpg"
+hero_alt: "Ddp vs Drayage Costs"
+hero_credit: "Photo: https://kaboompics.com/ / Pexels"
 affiliate_ready: false
 ---
 

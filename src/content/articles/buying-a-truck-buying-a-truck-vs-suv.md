@@ -6,6 +6,9 @@ verticalName: "Buying a Truck"
 slug: "buying-a-truck-vs-suv"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/buying-a-truck-vs-suv/hero.jpg"
+hero_alt: "Buying a Truck vs Suv"
+hero_credit: "Photo: Kampus Production / Pexels"
 affiliate_ready: false
 ---
 

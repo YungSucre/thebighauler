@@ -6,6 +6,9 @@ verticalName: "Contract Rates"
 slug: "contractor-rates-vs-employee-rates"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/contractor-rates-vs-employee-rates/hero.jpg"
+hero_alt: "Contractor Rates vs Employee Rates"
+hero_credit: "Photo: Jakub Zerdzicki / Pexels"
 affiliate_ready: false
 ---
 

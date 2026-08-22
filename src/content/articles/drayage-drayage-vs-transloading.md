@@ -6,6 +6,9 @@ verticalName: "Drayage"
 slug: "drayage-vs-transloading"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/drayage-vs-transloading/hero.jpg"
+hero_alt: "Drayage vs Transloading"
+hero_credit: "Photo: K / Pexels"
 affiliate_ready: false
 ---
 

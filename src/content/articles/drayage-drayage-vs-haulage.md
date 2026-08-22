@@ -6,6 +6,9 @@ verticalName: "Drayage"
 slug: "drayage-vs-haulage"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/drayage-vs-haulage/hero.jpg"
+hero_alt: "Drayage vs Haulage"
+hero_credit: "Photo: hitesh Sarain / Pexels"
 affiliate_ready: false
 ---
 

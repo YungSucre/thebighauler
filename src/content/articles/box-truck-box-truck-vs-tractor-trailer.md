@@ -6,6 +6,9 @@ verticalName: "Box Trucks"
 slug: "box-truck-vs-tractor-trailer"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/box-truck-vs-tractor-trailer/hero.jpg"
+hero_alt: "Box Truck vs Tractor Trailer"
+hero_credit: "Photo: Peter Buhler / Pexels"
 affiliate_ready: false
 ---
 

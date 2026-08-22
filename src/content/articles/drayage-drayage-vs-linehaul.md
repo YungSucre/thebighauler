@@ -6,6 +6,9 @@ verticalName: "Drayage"
 slug: "drayage-vs-linehaul"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/drayage-vs-linehaul/hero.jpg"
+hero_alt: "Drayage vs Linehaul"
+hero_credit: "Photo: Macourt Media / Pexels"
 affiliate_ready: false
 ---
 

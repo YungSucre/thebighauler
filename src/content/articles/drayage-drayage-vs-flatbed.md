@@ -6,6 +6,9 @@ verticalName: "Drayage"
 slug: "drayage-vs-flatbed"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/drayage-vs-flatbed/hero.jpg"
+hero_alt: "Drayage vs Flatbed"
+hero_credit: "Photo: Tayssir Kadamany / Pexels"
 affiliate_ready: false
 ---
 
