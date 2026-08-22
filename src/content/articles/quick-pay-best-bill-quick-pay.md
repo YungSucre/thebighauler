@@ -6,6 +6,9 @@ verticalName: "Quick Pay"
 slug: "best-bill-quick-pay"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-bill-quick-pay/hero.jpg"
+hero_alt: "Best Bill Quick Pay"
+hero_credit: "Photo: Ornán  Rodríguez Velázquez / Pexels"
 affiliate_ready: false
 ---
 

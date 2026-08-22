@@ -6,6 +6,9 @@ verticalName: "Quick Pay"
 slug: "best-factoring-companies-for-training"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-factoring-companies-for-training/hero.jpg"
+hero_alt: "Best Factoring Companies for Training"
+hero_credit: "Photo: Matheus Bertelli / Pexels"
 affiliate_ready: false
 ---
 

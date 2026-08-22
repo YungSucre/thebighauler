@@ -6,6 +6,9 @@ verticalName: "Quick Pay"
 slug: "best-factoring-companies-for-trade"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-factoring-companies-for-trade/hero.jpg"
+hero_alt: "Best Factoring Companies for Trade"
+hero_credit: "Photo: 炀 何 / Pexels"
 affiliate_ready: false
 ---
 

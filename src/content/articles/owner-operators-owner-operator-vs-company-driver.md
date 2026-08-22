@@ -6,6 +6,9 @@ verticalName: "Owner-Operator Basics"
 slug: "owner-operator-vs-company-driver"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/owner-operator-vs-company-driver/hero.jpg"
+hero_alt: "Owner Operator vs Company Driver"
+hero_credit: "Photo: Will Kirk / Pexels"
 affiliate_ready: false
 ---
 

@@ -6,6 +6,9 @@ verticalName: "Truck Tires"
 slug: "auto-tire-oil-change-tips"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/auto-tire-oil-change-tips/hero.jpg"
+hero_alt: "Auto Tire Oil Change Tips"
+hero_credit: "Photo: Gustavo Fring / Pexels"
 affiliate_ready: false
 ---
 

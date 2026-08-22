@@ -23,21 +23,42 @@ def get_pexels_key():
 
 KEY = get_pexels_key()
 
-def pexels_search(q):
+def pexels_search(q, retries=4):
     url = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode(
         {"query": q, "per_page": 3, "orientation": "landscape"})
-    req = urllib.request.Request(url, headers={"Authorization": KEY, "User-Agent": UA_FULL})
-    with urllib.request.urlopen(req, timeout=25) as r:
-        return json.loads(r.read()).get("photos", [])
+    for a in range(retries):
+        try:
+            req = urllib.request.Request(url, headers={"Authorization": KEY, "User-Agent": UA_FULL})
+            with urllib.request.urlopen(req, timeout=25) as r:
+                return json.loads(r.read()).get("photos", [])
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and a < retries - 1:
+                # rate limit Pexels : backoff exponentiel 5s, 10s, 20s
+                wait = 5 * (2 ** a)
+                print(f"    429 — backoff {wait}s", flush=True)
+                time.sleep(wait)
+                continue
+            raise
+    return []
 
-def download(url, dest):
-    req = urllib.request.Request(url, headers={"User-Agent": UA_FULL})
-    with urllib.request.urlopen(req, timeout=40) as r:
-        data = r.read()
-    if len(data) < 20000 or data[:2] != b"\xff\xd8":
-        raise RuntimeError("bad jpeg")
-    dest.write_bytes(data)
-    return len(data)
+def download(url, dest, retries=4):
+    for a in range(retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA_FULL})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                data = r.read()
+            if len(data) < 20000 or data[:2] != b"\xff\xd8":
+                raise RuntimeError("bad jpeg")
+            dest.write_bytes(data)
+            return len(data)
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and a < retries - 1:
+                wait = 5 * (2 ** a)
+                print(f"    429 download — backoff {wait}s", flush=True)
+                time.sleep(wait)
+                continue
+            raise
+    raise RuntimeError("download failed")
 
 def article_keywords(title):
     """Extrait les mots-clés de recherche : le sujet de la sous-niche."""
@@ -99,7 +120,7 @@ def main():
             print(f"    ✓ hero {slug} ({os.path.getsize(hero)//1024} Ko)", flush=True)
         except Exception as e:
             print(f"    erreur: {e}", flush=True)
-        time.sleep(0.4)
+        time.sleep(1.2)
     print(f"TERMINÉ: {updated} articles avec hero", flush=True)
 
 if __name__ == "__main__":

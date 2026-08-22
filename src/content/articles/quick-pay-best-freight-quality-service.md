@@ -6,6 +6,9 @@ verticalName: "Quick Pay"
 slug: "best-freight-quality-service"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/best-freight-quality-service/hero.jpg"
+hero_alt: "Best Freight Quality Service"
+hero_credit: "Photo: Robert So / Pexels"
 affiliate_ready: false
 ---
 
