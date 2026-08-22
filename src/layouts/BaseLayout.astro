@@ -197,6 +197,23 @@ const blocks = [block, breadcrumbBlock, ...jsonLd].filter(Boolean);
       .hero-proof { font-size: 0.85rem; color: rgba(255,255,255,0.75); margin: 1rem 0 0; }
       /* ---- Stats bar (ambre) ---- */
       .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; margin-top: 1.4rem; }
+      .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; margin: 1.2rem 0; }
+      .tool-card {
+        display: block; background: #fff; border: 1px solid var(--line); border-radius: 14px;
+        padding: 1.3rem 1.4rem; text-decoration: none; color: inherit;
+        box-shadow: 0 1px 3px rgba(0,0,0,.05); transition: transform .12s ease, box-shadow .12s ease;
+      }
+      .tool-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.09); }
+      .tool-card h3 { margin: .5rem 0 .4rem; font-size: 1.1rem; color: var(--ink); font-family: 'Barlow Condensed', sans-serif; letter-spacing: .01em; }
+      .tool-card p { margin: 0 0 .8rem; font-size: .9rem; color: #55544e; line-height: 1.5; }
+      .tool-status {
+        display: inline-block; font-size: .7rem; font-weight: 800; text-transform: uppercase;
+        letter-spacing: .06em; padding: .25rem .6rem; border-radius: 20px;
+        background: #e8f0f7; color: #1c4a6b;
+      }
+      .tool-soon { opacity: .68; }
+      .tool-soon .tool-status { background: #eeece4; color: #6b6a63; }
+      .tool-cta { font-size: .88rem; font-weight: 700; color: var(--amber-deep); }
       .stats-bar .stat { text-align: center; border-right: 1px solid var(--line); }
       .stats-bar .stat:last-child { border-right: none; }
       .stats-bar .stat b { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--amber-deep); letter-spacing: 0.01em; }
