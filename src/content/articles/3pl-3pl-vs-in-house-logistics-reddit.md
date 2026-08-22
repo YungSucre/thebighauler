@@ -6,6 +6,9 @@ verticalName: "Third-Party Logistics"
 slug: "3pl-vs-in-house-logistics-reddit"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/3pl-vs-in-house-logistics-reddit/hero.jpg"
+hero_alt: "3pl vs in House Logistics Reddit"
+hero_credit: "Photo: Tima Miroshnichenko / Pexels"
 affiliate_ready: false
 ---
 

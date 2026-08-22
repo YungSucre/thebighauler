@@ -6,6 +6,9 @@ verticalName: "Box Trucks"
 slug: "box-truck-vs-sprinter-van"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/box-truck-vs-sprinter-van/hero.jpg"
+hero_alt: "Box Truck vs Sprinter Van"
+hero_credit: "Photo: hitesh Sarain / Pexels"
 affiliate_ready: false
 ---
 

@@ -6,6 +6,9 @@ verticalName: "CDL Endorsements"
 slug: "tanker-endorsement-vs-hazmat-endorsement"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/tanker-endorsement-vs-hazmat-endorsement/hero.jpg"
+hero_alt: "Tanker Endorsement vs Hazmat Endorsement"
+hero_credit: "Photo: cnrdmroglu / Pexels"
 affiliate_ready: false
 ---
 

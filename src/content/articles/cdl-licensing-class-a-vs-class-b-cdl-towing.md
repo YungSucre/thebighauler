@@ -6,6 +6,9 @@ verticalName: "CDL Licensing"
 slug: "class-a-vs-class-b-cdl-towing"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/class-a-vs-class-b-cdl-towing/hero.jpg"
+hero_alt: "Class A vs Class B CDL Towing"
+hero_credit: "Photo: Artem Makarov / Pexels"
 affiliate_ready: false
 ---
 

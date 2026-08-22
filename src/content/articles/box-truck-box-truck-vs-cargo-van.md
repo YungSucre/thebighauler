@@ -6,6 +6,9 @@ verticalName: "Box Trucks"
 slug: "box-truck-vs-cargo-van"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/box-truck-vs-cargo-van/hero.jpg"
+hero_alt: "Box Truck vs Cargo Van"
+hero_credit: "Photo: Mehmet Turgut  Kirkgoz / Pexels"
 affiliate_ready: false
 ---
 

@@ -6,6 +6,9 @@ verticalName: "Bobtail Insurance"
 slug: "semi-truck-bobtail-vs-deadhead"
 status: "published"
 pubDate: 2026-08-21
+hero_image: "/images/articles/semi-truck-bobtail-vs-deadhead/hero.jpg"
+hero_alt: "Semi Truck Bobtail vs Deadhead"
+hero_credit: "Photo: Robert So / Pexels"
 affiliate_ready: false
 ---
 
