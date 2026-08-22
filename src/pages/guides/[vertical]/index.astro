@@ -2,6 +2,7 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { VERTICALS } from "../../../config";
+import { HUB_TOPICS } from "../../../data/hub_topics";
 
 export async function getStaticPaths() {
   return VERTICALS.map((v) => ({ params: { vertical: v.id }, props: { v } }));
@@ -117,6 +118,17 @@ const intro = INTROS[v.id] || `Practical guides for ${v.name.toLowerCase()}.`;
   <span class="eyebrow" style="display:inline-block;background:var(--amber-soft);color:var(--amber-deep);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:0.35rem 0.8rem;border-radius:999px;margin-bottom:1.2rem;">{v.name}</span>
   <h1>{v.name} guides</h1>
   <p class="lead">{intro}</p>
+
+  {(HUB_TOPICS[v.id] || []).length > 0 && (
+    <section class="card" style="margin-bottom:2rem;">
+      <h3 style="margin-top:0;">What you will find here</h3>
+      <ul style="margin:0;padding-left:1.2rem;columns:2;column-gap:2.5rem;list-style:disc;">
+        {(HUB_TOPICS[v.id] || []).map((t) => (
+          <li style="margin-bottom:0.35rem;break-inside:avoid;">{t}</li>
+        ))}
+      </ul>
+    </section>
+  )}
 
   {sorted.length === 0 && (
     <div class="card"><strong>Coming soon.</strong> Guides on {v.name.toLowerCase()} are being prepared.</div>
