@@ -395,5 +395,299 @@
     "women trucking companies",
     "women cdl training",
     "women truck driver safety"
+  ],
+  "hours-of-service": [
+    "hours of service rules",
+    "hours of service violations",
+    "34 hour reset",
+    "split sleeper berth",
+    "hos exemptions"
+  ],
+  "dot-compliance": [
+    "dot inspection",
+    "dot audit",
+    "dot compliance",
+    "dot violations",
+    "dot requirements trucking"
+  ],
+  "ifta": [
+    "ifta filing",
+    "ifta requirements",
+    "ifta quarterly",
+    "ifta audit",
+    "ifta fuel tax"
+  ],
+  "hazmat": [
+    "hazmat endorsement",
+    "hazmat training",
+    "hazmat placards",
+    "hazmat trucking",
+    "hazmat safety"
+  ],
+  "permits-oversize": [
+    "oversize permit",
+    "oversize load permit",
+    "oversize escort",
+    "oversize load rules",
+    "overweight permit"
+  ],
+  "load-boards": [
+    "load board",
+    "dat load board",
+    "truckstop load board",
+    "load board membership",
+    "free load boards"
+  ],
+  "freight-broker": [
+    "freight broker",
+    "freight broker license",
+    "freight broker bond",
+    "freight broker training",
+    "freight broker salary"
+  ],
+  "quick-pay": [
+    "quick pay freight",
+    "quick pay factoring",
+    "same day pay trucking",
+    "instant pay loads",
+    "quick pay companies"
+  ],
+  "dispatch-service": [
+    "dispatch service for truckers",
+    "truck dispatcher",
+    "dispatch service cost",
+    "find a dispatcher",
+    "dispatch service reviews"
+  ],
+  "lease-purchase": [
+    "lease purchase trucking",
+    "lease purchase program",
+    "lease purchase agreement",
+    "lease purchase vs buying",
+    "lease purchase companies"
+  ],
+  "finding-loads": [
+    "find loads",
+    "find freight loads",
+    "load finding apps",
+    "best way to find loads",
+    "direct shipper loads"
+  ],
+  "trucking-accounting": [
+    "trucking accounting software",
+    "bookkeeping for truckers",
+    "trucking accountant",
+    "owner operator bookkeeping",
+    "trucking accounting services"
+  ],
+  "trucking-taxes": [
+    "truck driver taxes",
+    "owner operator taxes",
+    "trucking tax deductions",
+    "per diem trucking",
+    "irs truck driver deductions"
+  ],
+  "diesel-engines": [
+    "diesel engine problems",
+    "diesel engine maintenance",
+    "diesel engine smoke",
+    "diesel engine knocking",
+    "diesel engine overhaul"
+  ],
+  "truck-tires": [
+    "truck tire pressure",
+    "truck tire replacement",
+    "best truck tires",
+    "truck tire chains",
+    "truck tire maintenance"
+  ],
+  "air-brakes": [
+    "air brake system",
+    "air brake adjustment",
+    "air brake test",
+    "air brake troubleshooting",
+    "air brake parts"
+  ],
+  "fifth-wheel": [
+    "fifth wheel adjustment",
+    "fifth wheel maintenance",
+    "fifth wheel coupling",
+    "fifth wheel inspection",
+    "fifth wheel lubricant"
+  ],
+  "fuel-cards": [
+    "fuel cards for trucking",
+    "best fuel cards",
+    "fleet fuel cards",
+    "fuel card comparison",
+    "fuel card without credit check"
+  ],
+  "diesel-prices": [
+    "diesel price forecast",
+    "diesel prices by state",
+    "cheapest diesel near me",
+    "diesel price history",
+    "why diesel prices rising"
+  ],
+  "def": [
+    "def fluid",
+    "def tank",
+    "def problems",
+    "def fluid cost",
+    "def quality"
+  ],
+  "fuel-economy": [
+    "truck fuel economy",
+    "improve truck mpg",
+    "truck fuel efficiency tips",
+    "best mpg truck",
+    "idle reduction"
+  ],
+  "commercial-auto": [
+    "commercial auto insurance truck",
+    "commercial truck insurance cost",
+    "commercial auto insurance requirements",
+    "commercial auto quotes",
+    "commercial auto vs personal"
+  ],
+  "cargo-insurance": [
+    "cargo insurance trucking",
+    "cargo insurance cost",
+    "cargo insurance requirements",
+    "cargo claims",
+    "freight cargo insurance"
+  ],
+  "bobtail": [
+    "bobtail insurance",
+    "bobtail insurance cost",
+    "bobtail vs non trucking",
+    "bobtail coverage",
+    "bobtail requirements"
+  ],
+  "truck-financing": [
+    "truck financing",
+    "semi truck financing",
+    "truck loans",
+    "truck financing bad credit",
+    "commercial truck loan rates"
+  ],
+  "cdl-endorsements": [
+    "cdl endorsements",
+    "hazmat endorsement cdl",
+    "tanker endorsement",
+    "doubles triples endorsement",
+    "passenger endorsement cdl"
+  ],
+  "cdl-practice-test": [
+    "cdl practice test",
+    "cdl general knowledge test",
+    "cdl air brakes test",
+    "cdl hazmat test",
+    "cdl test questions"
+  ],
+  "driving-school": [
+    "cdl driving school",
+    "truck driving school cost",
+    "cdl training programs",
+    "cdl school near me",
+    "best cdl schools"
+  ],
+  "truck-driver-jobs": [
+    "truck driver jobs",
+    "cdl jobs near me",
+    "trucking companies hiring",
+    "regional truck driver jobs",
+    "local cdl jobs"
+  ],
+  "team-driving": [
+    "team driving",
+    "team truck driver pay",
+    "team driving jobs",
+    "team driving vs solo",
+    "team driver requirements"
+  ],
+  "pre-trip": [
+    "pre trip inspection",
+    "pre trip inspection checklist",
+    "cdl pre trip",
+    "pre trip inspection video",
+    "pre trip air brakes"
+  ],
+  "backing": [
+    "backing a truck trailer",
+    "truck backing techniques",
+    "backing into dock",
+    "truck backing accidents",
+    "backing training"
+  ],
+  "mountain-driving": [
+    "mountain driving truck",
+    "truck downgrade braking",
+    "mountain driving tips",
+    "runaway truck ramp",
+    "jake brake mountain"
+  ],
+  "winter-driving": [
+    "winter driving truck",
+    "truck snow chains",
+    "driving truck in snow",
+    "truck winterization",
+    "ice road trucking tips"
+  ],
+  "night-driving": [
+    "night driving truck",
+    "truck night driving tips",
+    "driving truck at night",
+    "night driving fatigue",
+    "truck headlights night"
+  ],
+  "gps-truck": [
+    "truck gps",
+    "best truck gps",
+    "truck gps app",
+    "gps for semi trucks",
+    "truck navigation app"
+  ],
+  "dash-cams": [
+    "truck dash cam",
+    "best dash cam truck",
+    "dash cam installation truck",
+    "dash cam requirements",
+    "truck camera system"
+  ],
+  "eld-apps": [
+    "eld app",
+    "best eld app",
+    "eld app for owner operators",
+    "free eld app",
+    "eld app comparison"
+  ],
+  "weather-apps": [
+    "trucker weather app",
+    "best weather app truckers",
+    "weather app for trucking",
+    "road weather app",
+    "truck route weather"
+  ],
+  "truck-parking": [
+    "truck parking near me",
+    "truck parking app",
+    "reserve truck parking",
+    "truck parking cost",
+    "safe truck parking"
+  ],
+  "rest-areas": [
+    "rest areas near me",
+    "truck rest areas",
+    "rest area rules truck",
+    "rest area safety",
+    "rest stop overnight parking"
+  ],
+  "trucker-lifestyle": [
+    "trucker lifestyle",
+    "life on the road trucker",
+    "trucker meals",
+    "trucker sleep schedule",
+    "trucker family life"
   ]
 }

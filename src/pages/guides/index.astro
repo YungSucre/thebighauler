@@ -1,40 +1,51 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { VERTICALS } from "../../config";
+import { CATEGORIES, VERTICALS } from "../../config";
 
 const articles = await getCollection("articles", ({ data }) => data.status === "published");
 const byVertical = Object.fromEntries(VERTICALS.map((v) => [v.id, articles.filter((a) => a.data.vertical === v.id)]));
 const total = articles.length;
 ---
 
-<BaseLayout title="All Guides: The Big Hauler" description="Every guide published by The Big Hauler, organized by topic: ELD compliance, dispatch, maintenance, fuel, insurance, and CDL.">
+<BaseLayout title="All Guides: The Big Hauler" description="Every guide published by The Big Hauler, organized by topic: ELD compliance, dispatch, maintenance, fuel, insurance, CDL, logistics, and fleet management.">
   <nav style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;">
     <a href="/">Home</a> › Guides
   </nav>
   <h1>All guides</h1>
   <p class="lead">
-    {total} practical guides for truck drivers and owner-operators, organized by topic. New guides are added regularly.
+    {total} practical guides for truck drivers, owner-operators, and fleet managers, organized by topic. New guides are added regularly.
   </p>
 
-  {VERTICALS.map((v) => {
-    const list = byVertical[v.id] || [];
-    if (list.length === 0) return null;
-    const sorted = list.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-    return (
-      <section style="margin-bottom:2.5rem;">
-        <h2><a href={`/guides/${v.id}/`} style="text-decoration:none;">{v.name}</a> <span style="font-size:0.85rem;color:var(--muted);font-weight:400;">({list.length})</span></h2>
-        <div class="grid">
-          {sorted.map((a) => (
-            <article class="article-card">
-              <span class="tag">{a.data.verticalName}</span>
-              <h3><a href={`/guides/${v.id}/${a.data.slug}/`}>{a.data.title}</a></h3>
-              <p class="excerpt">{a.data.description}</p>
-              <p class="date">{a.data.pubDate.toISOString().slice(0, 10)}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-    );
-  })}
+  <nav class="family-chips" aria-label="Topic families" style="margin-bottom:2rem;">
+    {CATEGORIES.map((cat) => (
+      <a href={`#${cat.id}`}>{cat.name}</a>
+    ))}
+  </nav>
+
+  {CATEGORIES.map((cat) => (
+    <section id={cat.id} style="margin-bottom:2.5rem;scroll-margin-top:6rem;">
+      <h2 style="border-bottom:1px solid var(--line);padding-bottom:0.5rem;">{cat.name}</h2>
+      {cat.verticals.map((v) => {
+        const list = byVertical[v.id] || [];
+        if (list.length === 0) return null;
+        const sorted = list.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+        return (
+          <div style="margin-top:1.5rem;">
+            <h3 style="margin-bottom:0.6rem;"><a href={`/guides/${v.id}/`} style="text-decoration:none;">{v.name}</a> <span style="font-size:0.85rem;color:var(--muted);font-weight:400;">({list.length})</span></h3>
+            <div class="grid">
+              {sorted.map((a) => (
+                <article class="article-card">
+                  <span class="tag">{a.data.verticalName}</span>
+                  <h3><a href={`/guides/${v.id}/${a.data.slug}/`}>{a.data.title}</a></h3>
+                  <p class="excerpt">{a.data.description}</p>
+                  <p class="date">{a.data.pubDate.toISOString().slice(0, 10)}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </section>
+  ))}
 </BaseLayout>

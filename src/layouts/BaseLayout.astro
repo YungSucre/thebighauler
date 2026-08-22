@@ -128,7 +128,13 @@ const blocks = [block, breadcrumbBlock, ...jsonLd].filter(Boolean);
       nav.desktop .has-dropdown > a::after { content: "▾"; font-size: 0.62rem; margin-left: 0.28rem; color: rgba(255,255,255,0.6); }
       nav.desktop .dropdown { display: none; position: absolute; top: calc(100% + 14px); left: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.75rem; min-width: 270px; z-index: 60; }
       nav.desktop .dropdown.wide { min-width: 500px; display: none; grid-template-columns: 1fr 1fr; gap: 0.25rem 1.5rem; }
-      nav.desktop .has-dropdown:hover .dropdown, nav.desktop .has-dropdown:hover .dropdown.wide { display: grid; }
+      /* Mega menu Topics : toutes les familles en grille 4 colonnes (15 familles,
+         95 verticals tiennent sans déborder du viewport) */
+      nav.desktop .dropdown.mega { min-width: 880px; max-width: 92vw; display: none; grid-template-columns: repeat(4, 1fr); gap: 0.6rem 1.4rem; padding: 1rem 1.2rem; left: -320px; }
+      nav.desktop .dropdown.mega .mega-col { display: flex; flex-direction: column; gap: 0.1rem; }
+      nav.desktop .dropdown.mega .mega-col .mega-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: var(--amber-deep); padding: 0.2rem 0.5rem 0.15rem; border-bottom: 1px solid var(--line); margin-bottom: 0.2rem; }
+      nav.desktop .dropdown.mega a { padding: 0.28rem 0.5rem; font-size: 0.84rem; }
+      nav.desktop .has-dropdown:hover .dropdown, nav.desktop .has-dropdown:hover .dropdown.wide, nav.desktop .has-dropdown:hover .dropdown.mega { display: grid; }
       nav.desktop .has-dropdown::before { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 14px; }
       nav.desktop .dropdown a { display: block; margin: 0; padding: 0.42rem 0.7rem; border-radius: 8px; font-size: 0.88rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
       nav.desktop .dropdown a:hover { background: var(--amber-soft); color: var(--amber-deep); }
@@ -168,10 +174,12 @@ const blocks = [block, breadcrumbBlock, ...jsonLd].filter(Boolean);
       .article-content h2:first-of-type { margin-top: 1rem; }
       /* ---- HERO : bandeau sombre avec liseré ambre ---- */
       .hero { padding: 2.5rem 0 2.2rem; }
-      .hero-band { background: linear-gradient(120deg, var(--steel) 0%, var(--steel-2) 70%, #31465e 100%); color: #fff; border-radius: 16px; padding: clamp(1.5rem, 4vw, 2.6rem); border-left: 6px solid var(--amber); }
+      .hero-band { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(1.2rem, 3vw, 2.2rem); align-items: center; background: linear-gradient(120deg, var(--steel) 0%, var(--steel-2) 70%, #31465e 100%); color: #fff; border-radius: 16px; padding: clamp(1.5rem, 3.5vw, 2.4rem); border-left: 6px solid var(--amber); }
       .hero-band .eyebrow { display: inline-block; background: var(--amber); color: var(--steel); font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.3rem 0.85rem; border-radius: 999px; margin-bottom: 1rem; }
-      .hero-band h1 { color: #fff; margin-bottom: 0.7rem; font-size: clamp(2rem, 4.5vw, 3rem); }
-      .hero-band p.lead { color: rgba(255,255,255,0.8); font-size: clamp(1rem, 1.5vw, 1.15rem); max-width: 56ch; margin-bottom: 1.3rem; }
+      .hero-band h1 { color: #fff; margin-bottom: 0.7rem; font-size: clamp(2rem, 4vw, 2.8rem); }
+      .hero-band p.lead { color: rgba(255,255,255,0.8); font-size: clamp(1rem, 1.4vw, 1.12rem); max-width: 52ch; margin-bottom: 1.3rem; }
+      .hero-band-img { width: 100%; max-height: clamp(190px, 28vh, 300px); object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.14); }
+      @media (max-width: 720px) { .hero-band { grid-template-columns: 1fr; } .hero-band-img { max-height: 170px; } }
       .hero-ctas { display: flex; gap: 0.9rem; flex-wrap: wrap; }
       .btn { display: inline-block; background: var(--amber); color: var(--steel) !important; font-weight: 700; font-size: 0.95rem; padding: 0.72rem 1.5rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
       .btn:hover { background: #f59e0b; }
@@ -261,17 +269,24 @@ const blocks = [block, breadcrumbBlock, ...jsonLd].filter(Boolean);
           <form class="nav-search" action="/search/" method="get" role="search">
             <input name="q" type="search" placeholder="Search guides…" autocomplete="off" aria-label="Search guides" />
           </form>
-          {CATEGORIES.map((cat) => (
+          {CATEGORIES.length > 0 && (
             <span class="has-dropdown">
-              <a href={`/guides/`}>{cat.name.split(" & ")[0]}</a>
-              <div class={`dropdown ${cat.verticals.length > 7 ? "wide" : ""}`}>
-                <div class="dd-label">{cat.name}</div>
-                {cat.verticals.map((v) => (
-                  <a href={`/guides/${v.id}/`}>{v.name}</a>
+              <a href="/guides/">Topics</a>
+              <div class="dropdown mega">
+                {CATEGORIES.map((cat) => (
+                  <div class="mega-col">
+                    <a class="mega-label" href={`/guides/#${cat.id}`}>{cat.name}</a>
+                    {cat.verticals.slice(0, 7).map((v) => (
+                      <a href={`/guides/${v.id}/`}>{v.name}</a>
+                    ))}
+                    {cat.verticals.length > 7 && (
+                      <a href={`/guides/#${cat.id}`} style="font-size:0.78rem;font-weight:700;color:var(--amber-deep);">All {cat.verticals.length} topics →</a>
+                    )}
+                  </div>
                 ))}
               </div>
             </span>
-          ))}
+          )}
           <a href="/about/">About</a>
           <span class="nav-cta"><a class="btn btn-sm" href="/guides/">Browse guides</a></span>
         </nav>
