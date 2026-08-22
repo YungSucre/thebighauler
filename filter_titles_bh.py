@@ -90,6 +90,11 @@ TRUCK_TERMS = [
     "women in trucking", "female driver", "female truck",
     "spot rate", "spot market", "contract rate", "rate per mile",
     "load rate", "freight rate",
+    # logistique + flotte (ajoutés après l'extension superniche)
+    "fleet", "logistics", "warehouse", "supply chain", "intermodal",
+    "drayage", "3pl", "last mile", "cold chain", "freight forwarding",
+    "route planning", "route optimization", "telematics", "container",
+    "forklift", "inventory", "pick and pack", "distribution",
 ]
 
 def is_noise(title):

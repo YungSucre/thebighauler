@@ -15,6 +15,10 @@ OUTPUTS = ROOT / "outputs"
 STATE = OUTPUTS / "produce_state.json"
 TITLES = OUTPUTS / "titles_all.jsonl"
 
+# Mapping vertical -> nom propre (généré depuis config.ts)
+sys.path.insert(0, str(OUTPUTS))
+from vertical_names import VERTICAL_NAMES
+
 # DeepSeek
 sys.path.insert(0, "/root/niche-finder/scripts")
 def load_key():
@@ -117,28 +121,8 @@ def load_state():
     return {"done": []}
 
 def vertical_name(vid):
-    """Nom propre du vertical depuis config.ts (fallback title case)."""
-    names = {
-        "legal": "Legal Practice", "medical": "Medical Practice",
-        "dental": "Dental Practice", "therapy": "Therapy & Counseling",
-        "vet": "Veterinary Practice", "physical-therapy": "Physical Therapy",
-        "pharmacy": "Pharmacy", "chiro": "Chiropractic", "optometry": "Optometry",
-        "podiatry": "Podiatry", "audiology": "Audiology",
-        "speech-therapy": "Speech Therapy", "medspa": "Med Spa & Aesthetics",
-        "accounting": "Accounting Firm", "financial-advisory": "Financial Advisory",
-        "occupational-therapy": "Occupational Therapy", "acupuncture": "Acupuncture",
-        "naturopathy": "Naturopathy", "nutrition": "Nutrition & Dietetics",
-        "midwifery": "Midwifery", "nurse-practice": "Nurse Practitioner Practice",
-        "home-health": "Home Health", "aba-therapy": "ABA Therapy",
-        "functional-medicine": "Functional Medicine", "plastic-surgery": "Plastic Surgery",
-        "fertility": "Fertility Clinic", "architecture": "Architecture Firm",
-        "engineering": "Engineering Firm", "consulting": "Consulting Firm",
-        "real-estate": "Real Estate Brokerage", "insurance-agency": "Insurance Agency",
-        "tutoring": "Tutoring Center", "music-school": "Music School",
-        "martial-arts": "Martial Arts Studio", "fitness-studio": "Fitness Studio",
-        "yoga-studio": "Yoga Studio", "salon": "Salon",
-    }
-    return names.get(vid, vid.title())
+    """Nom propre du vertical depuis config.ts (mapping généré)."""
+    return VERTICAL_NAMES.get(vid, vid.replace("-", " ").title())
 
 def main():
     import argparse
