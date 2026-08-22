@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { VERTICALS } from "../../../config";
+
+export async function getStaticPaths() {
+  return VERTICALS.map((v) => ({ params: { vertical: v.id }, props: { v } }));
+}
+
+const { v } = Astro.props;
+const articles = await getCollection("articles", ({ data }) => data.status === "published" && data.vertical === v.id);
+const sorted = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const INTROS: Record<string, string> = {
+  "eld-compliance": "ELD rules affect every driver who logs hours: which devices comply, how exemptions work, and what an inspector checks. These guides cover the electronic logging side of trucking, from buying your first device to passing a roadside audit.",
+  "hours-of-service": "Hours of service rules decide when you can drive, when you must rest, and what counts as on-duty time. These guides break down the HOS rules in plain language, including 34-hour resets, split sleeper berth, and the exceptions that actually apply to real routes.",
+  "dot-compliance": "A DOT inspection can happen on any road, any day. These guides cover what inspectors check, how to keep your paperwork straight, and what a violation really costs, so a roadside stop does not turn into a bad day.",
+  ifta: "IFTA is the fuel tax agreement that keeps interstate trucking from paying tax in every state. These guides explain how quarterly returns work, what records you need, and how to avoid the penalties that catch small fleets off guard.",
+  hazmat: "Hazmat endorsements, placards, and training are their own world inside trucking. These guides cover what it takes to haul hazardous materials legally, from the TSA background check to the rules at the loading dock.",
+  "permits-oversize": "Oversize and overweight loads need permits before they move. These guides cover state permit rules, escort requirements, route planning, and the paperwork that keeps a wide load legal.",
+  "tms-dispatch": "Transportation management software runs the back office of modern trucking: dispatch, billing, driver pay, and customer records. These guides compare the tools that small fleets and owner-operators actually use, and what each one should cost.",
+  "load-boards": "Load boards are where freight meets trucks: DAT, Truckstop, and the newer digital matchmakers. These guides explain how load boards work, what a membership is worth, and how to spot a load that will cost you more than it pays.",
+  "freight-broker": "Freight brokers sit between shippers and carriers, and the relationship is governed by tight rules. These guides cover broker agreements, double-brokering scams, and how to protect your freight bills.",
+  factoring: "Freight factoring turns unpaid invoices into cash today, for a fee. These guides explain recourse versus non-recourse factoring, what the fees really are, and when factoring makes sense for an owner-operator.",
+  "quick-pay": "Quick pay gets your invoices settled in days instead of weeks, but the discount adds up. These guides compare quick-pay options, the real cost per load, and how to keep the cash flow moving without giving away your margin.",
+  "dispatch-service": "A dispatch service finds loads, negotiates rates, and handles the paperwork, so you can drive. These guides cover what a good dispatcher does, how they charge, and the questions to ask before signing on.",
+  "owner-operators": "Being your own boss on the road means being your own accountant, mechanic, and sales team too. These guides cover the owner-operator side of trucking: costs per mile, taxes, and the decisions that separate profitable trucks from broke ones.",
+  "lease-purchase": "Lease-purchase deals promise a path to owning your truck, but the math is not always in your favor. These guides explain how lease-purchase contracts work, the fees hidden in the fine print, and how to compare a lease-purchase to buying outright.",
+  "finding-loads": "Finding good loads is the difference between a full schedule and deadhead miles. These guides cover load boards, direct shipper relationships, and the rate-per-mile math that tells you whether a load is worth taking.",
+  "trucking-accounting": "Trucking accounting runs on per-mile costs, fuel taxes, and a mountain of receipts. These guides cover bookkeeping for owner-operators, from choosing software to tracking expenses so tax season does not hurt.",
+  "trucking-taxes": "Trucker taxes include income tax, self-employment tax, IFTA, and a few surprises. These guides cover deductions that actually apply to drivers, how per diem works, and what to keep for the IRS.",
+  maintenance: "A truck that is not maintained does not earn. These guides cover preventive maintenance schedules, common diesel problems, and what repairs should cost, so you can catch trouble before it strands you.",
+  "diesel-engines": "Diesel engines are the heart of the truck, and they have their own failure modes: DPF clogging, injector trouble, EGR issues. These guides explain what goes wrong, how to diagnose it, and what a fix should cost.",
+  "truck-tires": "Tires are the most expensive wearable on a truck, and the most dangerous to ignore. These guides cover tire selection, pressure management, tread rules, and how to make a set of tires last.",
+  "air-brakes": "Air brakes are what stop an 80,000-pound truck, and they demand a different skillset than hydraulic brakes. These guides cover air brake inspections, adjustment, and the test every CDL holder has to pass.",
+  trailers: "The trailer is half the rig: dry van, reefer, flatbed, and step deck each come with their own rules and costs. These guides cover trailer types, maintenance, and what to check before every pull.",
+  "fifth-wheel": "The fifth wheel is where the tractor meets the trailer, and a bad coupling is a crash waiting to happen. These guides cover fifth wheel inspection, coupling and uncoupling, and the maintenance that keeps the connection safe.",
+  fuel: "Fuel is the biggest line item in trucking, and the easiest to waste. These guides cover fuel management: where to buy, how to track consumption, and the habits that save real money over a year of driving.",
+  "fuel-cards": "Fuel cards promise discounts and control, but the fine print varies wildly. These guides compare fuel card programs, the real discounts after fees, and which card fits a one-truck operation.",
+  "diesel-prices": "Diesel prices swing by region, season, and politics. These guides cover how diesel is priced, where to find the cheapest fuel on a route, and how fuel surcharges work.",
+  def: "DEF is required on every modern diesel truck, and getting it wrong is expensive. These guides cover DEF quality, storage, the warning lights that mean trouble, and what happens when the system fails.",
+  "fuel-economy": "Fuel economy is driven by speed, idling, aerodynamics, and maintenance. These guides cover the practices that improve miles per gallon, measured in the only number that matters: cents per mile.",
+  insurance: "Truck insurance is expensive and confusing, with primary liability, cargo, and physical damage layered on top of each other. These guides cover what coverage you actually need, what it costs, and how to shop for it.",
+  "commercial-auto": "Commercial auto insurance is the backbone of trucking coverage, and the rates are built on your driving record and radius. These guides explain how commercial auto policies work and how to keep the premium down.",
+  "cargo-insurance": "Cargo insurance covers what you are hauling, and the limits in a broker agreement may be higher than your policy. These guides cover cargo coverage, claims, and the paperwork that protects you when freight is damaged.",
+  bobtail: "Bobtail insurance covers the tractor when it is running without a trailer, a gap many drivers do not know they have. These guides explain when bobtail coverage applies, what it costs, and how it differs from non-trucking liability.",
+  "truck-financing": "Financing a truck means choosing between banks, dealers, and alternative lenders, with rates that punish the unprepared. These guides cover down payments, credit requirements, and the loan terms that make sense for a working truck.",
+  "cdl-licensing": "The CDL is the license to work, and getting it means school, tests, and a medical card. These guides cover Class A, B, and C requirements, the written tests, the skills test, and what it costs to get your license.",
+  "cdl-endorsements": "Endorsements unlock better jobs: hazmat, tanker, doubles and triples, passenger, and school bus. These guides cover what each endorsement requires, the tests involved, and which ones actually pay off.",
+  "cdl-practice-test": "The CDL written tests are passable with practice, and the questions follow predictable patterns. These guides cover the general knowledge, air brakes, and endorsement test topics, with the rules that show up again and again.",
+  "driving-school": "Driving school is the fastest path to a CDL for most people, but schools vary wildly in cost and quality. These guides cover what to look for in a school, what it should cost, and the alternatives to formal training.",
+  "truck-driver-jobs": "Truck driver jobs range from regional home-weekly to over-the-road and dedicated lanes. These guides cover how to read a job ad, the pay structures that actually exist, and the questions to ask before you sign.",
+  "team-driving": "Team driving keeps the truck moving around the clock, doubling miles and pay, and demanding real compatibility. These guides cover how team driving works, pay splits, and the habits that keep a team from falling apart.",
+  safety: "Safety is the part of trucking that keeps you alive and your license clean. These guides cover defensive driving, load securement, and the practices that prevent the violations that end careers.",
+  "pre-trip": "The pre-trip inspection is both a legal requirement and the best maintenance tool you own. These guides cover the full walk-around, what to check under the hood, and how to do the inspection fast without skipping the important parts.",
+  backing: "Backing a 70-foot combination into a tight dock is a skill that takes practice and a system. These guides cover backing techniques, spotter signals, and how to avoid the jackknife and the curb.",
+  "mountain-driving": "Mountain driving is where brakes, gears, and judgment get tested. These guides cover downgrade braking, gear selection, runaway ramps, and the techniques that keep a heavy truck under control on grades.",
+  "winter-driving": "Winter turns every highway into a test of traction and visibility. These guides cover chains, black ice, cold-weather starting, and the decisions that keep you off the shoulder in a storm.",
+  "night-driving": "Night driving means reduced visibility, fatigue, and wildlife on the road. These guides cover headlight use, fatigue management, and the habits that make night miles safer.",
+  "tech-apps": "Trucker apps cover everything from parking to scales to fuel prices. These guides review the apps that earn their place on a driver's phone, what they cost, and which ones are worth the storage.",
+  "gps-truck": "Truck GPS is different from car GPS: bridge heights, weight limits, and truck routes matter. These guides cover truck-specific navigation, the apps and units that work, and how to avoid the route that ends at a low bridge.",
+  "dash-cams": "Dash cams are cheap insurance against false claims and dispute-proof evidence of what happened. These guides cover camera placement, features that matter, and the privacy rules that apply to recording on the road.",
+  "eld-apps": "ELD apps turn a phone or tablet into a compliant logbook, and the options range from free to pricey. These guides compare ELD apps, the features that survive a DOT audit, and the pitfalls of cheap devices.",
+  "weather-apps": "Weather apps can mean the difference between planning around a storm and sitting in it. These guides cover the weather tools truckers actually use, from radar apps to road condition reports.",
+  "truck-stops": "Truck stops are the home base of the road: fuel, food, showers, and parking. These guides cover the major chains, loyalty programs, and how to get the most out of a stop without wasting time.",
+  "truck-parking": "Truck parking is scarce, and running out of hours with nowhere to park is a real problem. These guides cover parking apps, reserve-a-spot programs, and the strategies that keep you legal and safe overnight.",
+  "rest-areas": "Rest areas are free, but they fill up fast and come with their own risks. These guides cover what rest areas offer, the safety rules to follow, and when a paid lot is worth the money.",
+  "trucker-lifestyle": "Life on the road is the job: meals, sleep, exercise, and staying sane between loads. These guides cover the practical side of the trucker lifestyle, from cooking in the cab to staying healthy on a schedule that never stops.",
+};
+const intro = INTROS[v.id] || `Practical guides for ${v.name.toLowerCase()}.`;
+---
+
+<BaseLayout title={`${v.name} Guides: The Big Hauler`} description={`Practical guides on ${v.name.toLowerCase()} for truck drivers and owner-operators, checked and dated.`}>
+  <nav style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;">
+    <a href="/">Home</a> › <a href="/guides/">Guides</a> › {v.name}
+  </nav>
+  <span class="eyebrow" style="display:inline-block;background:var(--amber-soft);color:var(--amber-deep);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:0.35rem 0.8rem;border-radius:999px;margin-bottom:1.2rem;">{v.name}</span>
+  <h1>{v.name} guides</h1>
+  <p class="lead">{intro}</p>
+
+  {sorted.length === 0 && (
+    <div class="card"><strong>Coming soon.</strong> Guides on {v.name.toLowerCase()} are being prepared.</div>
+  )}
+
+  <div class="grid">
+    {sorted.map((a) => (
+      <article class="article-card">
+        <span class="tag">{a.data.verticalName}</span>
+        <h3><a href={`/guides/${v.id}/${a.data.slug}/`}>{a.data.title}</a></h3>
+        <p class="excerpt">{a.data.description}</p>
+        <p class="date">{a.data.pubDate.toISOString().slice(0, 10)}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

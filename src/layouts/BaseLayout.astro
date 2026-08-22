@@ -1,0 +1,336 @@
+---
+import { SITE, CATEGORIES } from "../config";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  type?: string;
+  breadcrumbs?: { name: string; url: string }[];
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  type = "website",
+  breadcrumbs = [],
+  jsonLd = [],
+} = Astro.props;
+
+const canonicalUrl = canonical
+  ? new URL(canonical, SITE.url).href
+  : new URL(Astro.url.pathname, SITE.url).href;
+
+const block = {
+  "@context": "https://schema.org",
+  "@type": type,
+  name: title,
+  description,
+  url: canonicalUrl,
+  ...(image ? { image } : {}),
+  publisher: { "@type": "Organization", name: SITE.name },
+};
+
+const breadcrumbBlock =
+  breadcrumbs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+          ...breadcrumbs.map((b, i) => ({
+            "@type": "ListItem",
+            position: i + 2,
+            name: b.name,
+            item: new URL(b.url, SITE.url).href,
+          })),
+        ],
+      }
+    : null;
+
+const blocks = [block, breadcrumbBlock, ...jsonLd].filter(Boolean);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={type} />
+    {image && <meta property="og:image" content={new URL(image, SITE.url).href} />}
+    {blocks.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify(blocks.length === 1 ? blocks[0] : blocks)} />
+    )}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style is:global>
+      :root {
+        --ink: #101828;
+        --muted: #5b6472;
+        --steel: #1c2a3a;
+        --steel-2: #27394e;
+        --amber: #e8880c;
+        --amber-deep: #c26e00;
+        --amber-soft: #fdf0dc;
+        --bg: #fbfaf8;
+        --soft: #f2f0ea;
+        --line: #e3e0d8;
+        --radius: 10px;
+        --shadow: 0 14px 34px rgba(16,24,40,0.14);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', -apple-system, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.7;
+        font-size: 17px;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1, h2, h3, h4 { font-family: 'Barlow Condensed', 'Inter', sans-serif; font-weight: 700; letter-spacing: 0.01em; }
+      /* ---- HEADER sombre (bande acier) ---- */
+      header.site {
+        position: sticky; top: 0; z-index: 50;
+        background: var(--steel);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(16,24,40,0.25);
+      }
+      header.site .wrap {
+        max-width: 1120px; margin: 0 auto; padding: 0.7rem 1.5rem;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      }
+      .brand { font-family: 'Barlow Condensed', sans-serif; font-size: 1.35rem; font-weight: 800; text-decoration: none; color: #fff; letter-spacing: 0.02em; display: flex; align-items: center; gap: 0.55rem; white-space: nowrap; text-transform: uppercase; }
+      .brand .logo { width: 34px; height: 34px; border-radius: 8px; background: var(--amber); color: var(--steel); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+      .brand span.amber { color: var(--amber); }
+      .nav-search input {
+        width: 160px; padding: 0.42rem 0.9rem; font-size: 0.83rem;
+        background: var(--steel-2); border: 1px solid rgba(255,255,255,0.18); border-radius: 999px;
+        color: #fff; transition: border-color 0.15s, width 0.15s;
+      }
+      .nav-search input::placeholder { color: rgba(255,255,255,0.55); }
+      .nav-search input:focus { outline: none; border-color: var(--amber); width: 200px; }
+      nav.desktop { display: flex; align-items: center; }
+      nav.desktop a { margin-left: 1.1rem; font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.85); text-decoration: none; white-space: nowrap; }
+      nav.desktop a:hover { color: var(--amber); }
+      nav.desktop .has-dropdown { position: relative; display: inline-block; white-space: nowrap; }
+      nav.desktop .has-dropdown > a::after { content: "▾"; font-size: 0.62rem; margin-left: 0.28rem; color: rgba(255,255,255,0.6); }
+      nav.desktop .dropdown { display: none; position: absolute; top: calc(100% + 14px); left: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.75rem; min-width: 270px; z-index: 60; }
+      nav.desktop .dropdown.wide { min-width: 500px; display: none; grid-template-columns: 1fr 1fr; gap: 0.25rem 1.5rem; }
+      nav.desktop .has-dropdown:hover .dropdown, nav.desktop .has-dropdown:hover .dropdown.wide { display: grid; }
+      nav.desktop .has-dropdown::before { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 14px; }
+      nav.desktop .dropdown a { display: block; margin: 0; padding: 0.42rem 0.7rem; border-radius: 8px; font-size: 0.88rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+      nav.desktop .dropdown a:hover { background: var(--amber-soft); color: var(--amber-deep); }
+      nav.desktop .dropdown .dd-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 0.35rem 0.7rem 0.15rem; grid-column: 1 / -1; }
+      nav.desktop .nav-cta { margin-left: 1.3rem; }
+      nav.desktop .nav-cta a { margin: 0; }
+      main { max-width: 1120px; margin: 0 auto; padding: 2.5rem 1.5rem 4.5rem; }
+      /* ---- FOOTER sombre (acier foncé, texte clair) ---- */
+      footer.site { background: var(--steel); color: rgba(255,255,255,0.72); font-size: 0.9rem; border-top: 4px solid var(--amber); }
+      footer.site .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+      footer.site .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr; gap: 2rem; padding: 2.8rem 0 2.2rem; min-width: 0; }
+      footer.site .footer-col { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+      footer.site .footer-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 0.4rem; }
+      footer.site .footer-col a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem; line-height: 1.9; white-space: nowrap; }
+      footer.site .footer-col a:hover { color: #fff; }
+      footer.site .brand { font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
+      footer.site .footer-col p { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
+      footer.site .footer-bottom { border-top: 1px solid rgba(255,255,255,0.14); padding: 1.1rem 1.5rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+      footer.site .footer-bottom p { margin: 0; }
+      @media (max-width: 768px) { footer.site .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; } }
+      h1 { font-size: 2.8rem; line-height: 1.08; font-weight: 800; margin-bottom: 1rem; }
+      h2 { font-size: 1.9rem; font-weight: 700; margin: 2.5rem 0 1rem; }
+      h3 { font-size: 1.35rem; font-weight: 700; margin: 1.8rem 0 0.7rem; }
+      p { margin-bottom: 1.1rem; }
+      ul, ol { margin: 0 0 1.25rem 1.4rem; }
+      li { margin-bottom: 0.45rem; }
+      a { color: var(--amber-deep); }
+      .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+      .lead { font-size: 1.15rem; color: var(--muted); margin-bottom: 2rem; max-width: 65ch; }
+      table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; font-size: 0.92rem; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+      th, td { border-bottom: 1px solid var(--line); padding: 0.7rem 0.9rem; text-align: left; vertical-align: top; }
+      th { background: var(--soft); font-weight: 600; }
+      tr:last-child td { border-bottom: none; }
+      blockquote { border-left: 4px solid var(--amber); padding: 0.6rem 1.25rem; margin: 1.5rem 0; background: var(--amber-soft); border-radius: 0 var(--radius) var(--radius) 0; }
+      .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; margin: 1.25rem 0; }
+      .article-content h2 { padding-top: 0.5rem; }
+      .article-content h2:first-of-type { margin-top: 1rem; }
+      /* ---- HERO : bandeau sombre avec liseré ambre ---- */
+      .hero { padding: 2.5rem 0 2.2rem; }
+      .hero-band { background: linear-gradient(120deg, var(--steel) 0%, var(--steel-2) 70%, #31465e 100%); color: #fff; border-radius: 16px; padding: clamp(1.5rem, 4vw, 2.6rem); border-left: 6px solid var(--amber); }
+      .hero-band .eyebrow { display: inline-block; background: var(--amber); color: var(--steel); font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.3rem 0.85rem; border-radius: 999px; margin-bottom: 1rem; }
+      .hero-band h1 { color: #fff; margin-bottom: 0.7rem; font-size: clamp(2rem, 4.5vw, 3rem); }
+      .hero-band p.lead { color: rgba(255,255,255,0.8); font-size: clamp(1rem, 1.5vw, 1.15rem); max-width: 56ch; margin-bottom: 1.3rem; }
+      .hero-ctas { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+      .btn { display: inline-block; background: var(--amber); color: var(--steel) !important; font-weight: 700; font-size: 0.95rem; padding: 0.72rem 1.5rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+      .btn:hover { background: #f59e0b; }
+      .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.4); color: #fff !important; }
+      .btn-ghost:hover { border-color: var(--amber); color: var(--amber) !important; background: transparent; }
+      .btn-sm { padding: 0.45rem 1.1rem; font-size: 0.88rem; line-height: 1.5; }
+      .btn.btn-sm { padding: 0.45rem 1.1rem; font-size: 0.88rem; line-height: 1.5; }
+      nav.desktop .nav-cta .btn { background: var(--amber); color: var(--steel) !important; }
+      nav.desktop .nav-cta .btn:hover { background: #f59e0b; }
+      .hero-search { display: flex; gap: 0.6rem; max-width: 34rem; margin-top: 1.3rem; }
+      .hero-search input { flex: 1; padding: 0.68rem 1rem; font-size: 0.92rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; color: #fff; }
+      .hero-search input::placeholder { color: rgba(255,255,255,0.55); }
+      .hero-search input:focus { outline: none; border-color: var(--amber); }
+      .hero-proof { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 1rem 0 0; }
+      /* ---- Stats bar (ambre) ---- */
+      .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; margin-top: 1.4rem; }
+      .stats-bar .stat { text-align: center; border-right: 1px solid var(--line); }
+      .stats-bar .stat:last-child { border-right: none; }
+      .stats-bar .stat b { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--amber-deep); letter-spacing: 0.01em; }
+      .stats-bar .stat span { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+      @media (max-width: 640px) { .stats-bar { padding: 1rem 0.5rem; gap: 0.5rem; } .stats-bar .stat b { font-size: 1.4rem; } .stats-bar .stat span { font-size: 0.62rem; } }
+      .mobile-menu-btn { display: none; background: none; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 0.4rem 0.7rem; font-size: 1.1rem; cursor: pointer; color: #fff; }
+      .mobile-menu-btn:hover { border-color: var(--amber); }
+      /* Chips familles */
+      .family-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+      .family-chips a { display: inline-block; background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: 0.85rem; font-weight: 600; padding: 0.4rem 0.95rem; border-radius: 999px; }
+      .family-chips a:hover { border-color: var(--amber); color: var(--amber-deep); background: var(--amber-soft); }
+      /* Grid verticales */
+      .vertical-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.9rem; margin: 1.5rem 0; }
+      .vertical-card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; display: flex; flex-direction: row; align-items: center; gap: 0.9rem; padding: 0.9rem 1.1rem; }
+      .vertical-card:hover { border-color: var(--amber); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,136,12,0.12); }
+      .vertical-card .thumb { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+      .vertical-card .vc-body { padding: 0; min-width: 0; }
+      .vertical-card h3 { margin: 0 0 0.15rem; font-size: 1.05rem; }
+      .vertical-card p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+      .vertical-card.no-img { padding: 1.1rem; }
+      /* Grid articles */
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+      .article-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; background: #fff; transition: box-shadow 0.15s, border-color 0.15s; display: flex; flex-direction: column; gap: 0.6rem; }
+      .article-card:hover { border-color: var(--amber); box-shadow: 0 4px 16px rgba(232,136,12,0.10); }
+      .article-card .tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--amber-deep); }
+      .article-card h3 { margin: 0; font-size: 1.08rem; line-height: 1.4; }
+      .article-card h3 a { color: var(--ink); text-decoration: none; }
+      .article-card h3 a:hover { color: var(--amber-deep); }
+      .article-card .excerpt { font-size: 0.9rem; color: var(--muted); }
+      .article-card .date { font-size: 0.8rem; color: var(--muted); margin-top: auto; padding-top: 0.35rem; }
+      .article-card h3 { overflow-wrap: break-word; }
+      .article-card.has-thumb { padding: 0.9rem; overflow: hidden; display: flex; flex-direction: row; gap: 1rem; align-items: flex-start; }
+      .article-card .thumb { width: 140px; height: 96px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+      .article-card .card-body { display: flex; flex-direction: column; gap: 0.35rem; padding: 0; min-width: 0; }
+      .article-card .excerpt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      @media (max-width: 640px) { .article-card .thumb { width: 110px; height: 84px; } }
+      /* Why grid */
+      .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+      .why-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; background: #fff; }
+      .why-card svg { width: 34px; height: 34px; stroke: var(--amber); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 0.9rem; }
+      .why-card h3 { margin: 0 0 0.4rem; font-size: 1.15rem; }
+      .why-card p { margin: 0; font-size: 0.92rem; color: var(--muted); }
+      .section-soft { background: var(--amber-soft); border: 1px solid #f3dfbd; border-radius: var(--radius); padding: 1.75rem 1.75rem 1.4rem; margin-top: 3rem; }
+      .section-soft h3 { margin-top: 0; }
+      @media (max-width: 640px) {
+        body { font-size: 16px; }
+        h1 { font-size: 2.2rem; }
+        .hero { padding: 2rem 0 1.8rem; }
+        nav.desktop { display: none; }
+        .mobile-menu-btn { display: inline-flex !important; }
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--steel); border-bottom: 1px solid rgba(255,255,255,0.15); padding: 1rem 1.5rem 1.5rem; }
+        .mobile-nav.open { display: block; }
+        .mobile-nav a { display: block; padding: 0.6rem 0; font-size: 1rem; color: rgba(255,255,255,0.9); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .mobile-nav a:hover { color: var(--amber); }
+        .mobile-nav .mn-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--amber); padding: 1rem 0 0.25rem; }
+      }
+      @media (min-width: 641px) { .mobile-menu-btn, .mobile-nav { display: none !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/"><span class="logo">
+          <svg viewBox="0 0 64 64" aria-hidden="true" style="width:22px;height:22px;display:block;">
+            <path d="M8 40h8v-8h14l10-14h6v22h8" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="20" cy="46" r="5" fill="currentColor"/>
+            <circle cx="48" cy="46" r="5" fill="currentColor"/>
+          </svg>
+        </span>The Big<span class="amber"> Hauler</span></a>
+        <nav class="desktop">
+          <form class="nav-search" action="/search/" method="get" role="search">
+            <input name="q" type="search" placeholder="Search guides…" autocomplete="off" aria-label="Search guides" />
+          </form>
+          {CATEGORIES.map((cat) => (
+            <span class="has-dropdown">
+              <a href={`/guides/`}>{cat.name.split(" & ")[0]}</a>
+              <div class={`dropdown ${cat.verticals.length > 7 ? "wide" : ""}`}>
+                <div class="dd-label">{cat.name}</div>
+                {cat.verticals.map((v) => (
+                  <a href={`/guides/${v.id}/`}>{v.name}</a>
+                ))}
+              </div>
+            </span>
+          ))}
+          <a href="/about/">About</a>
+          <span class="nav-cta"><a class="btn btn-sm" href="/guides/">Browse guides</a></span>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Menu" onclick="document.getElementById('mobile-nav').classList.toggle('open')">☰</button>
+      </div>
+      <div class="mobile-nav" id="mobile-nav">
+        <form action="/search/" method="get" role="search" style="padding:0.5rem 0 0.8rem;border-bottom:1px solid rgba(255,255,255,0.12);margin-bottom:0.4rem;">
+          <input name="q" type="search" placeholder="Search guides…" autocomplete="off" aria-label="Search guides" style="width:100%;padding:0.55rem 0.9rem;font-size:0.95rem;background:var(--steel-2);border:1px solid rgba(255,255,255,0.2);border-radius:10px;color:#fff;" />
+        </form>
+        {CATEGORIES.map((cat) => (
+          <>
+            <div class="mn-label">{cat.name}</div>
+            {cat.verticals.map((v) => (
+              <a href={`/guides/${v.id}/`}>{v.name}</a>
+            ))}
+          </>
+        ))}
+        <div class="mn-label">Company</div>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <div style="margin-top:1rem;"><a class="btn" href="/guides/" style="display:block;text-align:center;">Browse guides</a></div>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site">
+      <div class="wrap footer-grid">
+        <div class="footer-col">
+          <div class="brand"><span class="logo">
+            <svg viewBox="0 0 64 64" aria-hidden="true" style="width:20px;height:20px;display:block;">
+              <path d="M8 40h8v-8h14l10-14h6v22h8" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="20" cy="46" r="5" fill="currentColor"/>
+              <circle cx="48" cy="46" r="5" fill="currentColor"/>
+            </svg>
+          </span>The Big<span class="amber"> Hauler</span></div>
+          <p>Straight answers for truck drivers and owner-operators. ELD, dispatch, maintenance, fuel, insurance, and the business side of trucking, checked and dated.</p>
+        </div>
+        {CATEGORIES.slice(0, 3).map((cat) => (
+          <div class="footer-col">
+            <h4>{cat.name}</h4>
+            {cat.verticals.slice(0, 6).map((v) => (
+              <a href={`/guides/${v.id}/`}>{v.name}</a>
+            ))}
+          </div>
+        ))}
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href="/privacy/">Privacy policy</a>
+          <a href="/terms/">Terms of use</a>
+          <a href="/affiliate-disclosure/">Affiliate disclosure</a>
+        </div>
+      </div>
+      <div class="wrap footer-bottom">
+        <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
+        <p>An independent publisher. Content is for general information only and is not professional advice.</p>
+      </div>
+    </footer>
+  </body>
+</html>

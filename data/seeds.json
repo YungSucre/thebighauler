@@ -1,0 +1,17 @@
+{
+  "eld-compliance": ["eld devices", "eld exemptions", "hours of service", "ifta", "dot inspection", "fmcsa rules"],
+  "tms-dispatch": ["tms software", "dispatch software", "load boards", "dispatch service", "freight broker", "trucking tms"],
+  "owner-operators": ["owner operator", "owner operator expenses", "owner operator taxes", "finding loads", "lease purchase", "owner operator salary"],
+  "maintenance": ["truck maintenance", "diesel engine problems", "truck tires", "air brakes", "dpf cleaning", "oil change interval"],
+  "fuel": ["fuel cards for truckers", "fuel economy truck", "diesel prices", "def fluid", "fuel discounts", "idling"],
+  "insurance": ["truck insurance cost", "commercial auto insurance", "cargo insurance", "bobtail insurance", "non trucking liability"],
+  "factoring": ["freight factoring", "invoice factoring", "factoring companies", "quick pay freight", "recourse vs non recourse"],
+  "cdl-licensing": ["cdl requirements", "cdl endorsements", "cdl practice test", "hazmat endorsement", "class a cdl", "cdl medical card"],
+  "trailers": ["flatbed trailer", "reefer trailer", "dry van", "fifth wheel", "trailer maintenance", "gooseneck trailer"],
+  "safety": ["pre trip inspection", "dot inspection", "weigh stations", "hours of service violations", "fmcsa audit"],
+  "business": ["start a trucking company", "trucking business plan", "mc number", "trucking authority", "trucking accounting", "trucking insurance requirements"],
+  "tech-apps": ["trucker apps", "gps for trucks", "dash cams", "eld app", "trucker weather app", "backup camera truck"],
+  "driving": ["backing up a truck", "shifting a 18 speed", "mountain driving", "night driving tips", "winter driving truck", "fuel efficient driving"],
+  "pay-careers": ["truck driver salary", "cdl jobs", "truck driving school", "truck driver training", "team driving"],
+  "truck-stops": ["truck stops", "truck parking", "pilot flying j", "truck stop showers", "rest areas"]
+}
